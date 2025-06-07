@@ -26,8 +26,23 @@ export const actionType = {
   TOKEN_REFRESH: "TOKEN_REFRESH",
   LOGOUT: "LOGOUT",
   LOGIN: "LOGIN",
+  CREATE: "CREATE",
+  UPDATE: "UPDATE",
+  DELETE: "DELETE",
 } as const;
 
 export const moduleName = {
   AUTH: "AUTH",
+  PAYROLL_PERIOD: "PAYROLL_PERIOD",
+  ATTENDANCE: "ATTENDANCE",
+  OVERTIME: "OVERTIME",
+  REIMBURSEMENTS: "REIMBURSEMENTS",
+  PAYSLIPS: "PAYSLIPS",
 } as const;
+
+export const statusPayrollPeriod = ["open", "closed", "processed"] as const;
+
+export const role = {
+  ADMIN: "admin",
+  EMPLOYEE: "employee",
+};

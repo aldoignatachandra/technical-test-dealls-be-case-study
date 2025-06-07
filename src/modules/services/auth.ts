@@ -14,7 +14,7 @@ export const login = async (body: AuthLogin): Promise<TokenRes> => {
   const ctx = "auth-login";
   const user = await ShowByUsernameBuilder(body.username.trim().toLowerCase());
   const token = await JwtGenerator({ user_id: user.id });
-  const bodyExt = body as AuthLogin & { ip?: string; userAgent?: string };
+  const bodyExt = body as AuthLogin & { ip_address?: string; user_agent?: string };
 
   // Update user token in the database
   await UpdateTokenBuilder(user.id, token.token);
@@ -26,8 +26,8 @@ export const login = async (body: AuthLogin): Promise<TokenRes> => {
     record_id: user.id,
     action: actionType.LOGIN,
     module: moduleName.AUTH,
-    ip_address: bodyExt.ip,
-    user_agent: bodyExt.userAgent,
+    ip_address: bodyExt.ip_address,
+    user_agent: bodyExt.user_agent,
     additional_data: { token: token.token },
   });
 
@@ -42,7 +42,7 @@ export const refreshToken = async (user: UserRes): Promise<TokenRes> => {
 export const logout = async (body: AuthLogout): Promise<void> => {
   const ctx = "auth-logout";
   const user = await ShowByIdBuilder(body.user_id);
-  const bodyExt = body as AuthLogout & { ip?: string; userAgent?: string };
+  const bodyExt = body as AuthLogout & { ip_address?: string; user_agent?: string };
 
   // Delete user token in the database
   await DeleteTokenBuilder(body.user_id);
@@ -54,8 +54,8 @@ export const logout = async (body: AuthLogout): Promise<void> => {
     record_id: user.id,
     action: actionType.LOGOUT,
     module: moduleName.AUTH,
-    ip_address: bodyExt.ip,
-    user_agent: bodyExt.userAgent,
+    ip_address: bodyExt.ip_address,
+    user_agent: bodyExt.user_agent,
     additional_data: { lastToken: user.token },
   });
 

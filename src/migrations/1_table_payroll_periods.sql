@@ -7,10 +7,12 @@ CREATE TABLE IF NOT EXISTS public.payroll_periods (
     created_at timestamp with time zone NOT NULL DEFAULT now(),
     updated_at timestamp with time zone NOT NULL DEFAULT now(),
     created_by uuid,       -- references public.employees(id)
+    updated_by uuid,       -- references public.employees(id)
     processed_at timestamp with time zone,
     processed_by uuid,     -- references public.employees(id)
     CONSTRAINT payroll_periods_pkey PRIMARY KEY (id),
     CONSTRAINT fk_payroll_created_by FOREIGN KEY (created_by) REFERENCES public.employees(id),
+    CONSTRAINT fk_payroll_updated_by FOREIGN KEY (updated_by) REFERENCES public.employees(id),
     CONSTRAINT fk_payroll_processed_by FOREIGN KEY (processed_by) REFERENCES public.employees(id)
 );
 

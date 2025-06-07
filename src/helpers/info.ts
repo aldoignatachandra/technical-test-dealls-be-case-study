@@ -25,8 +25,8 @@ export const getRequestInfo = (c: Context): RequestInfo => {
     "Unknown Client";
 
   return {
-    ip,
-    userAgent,
+    ip_address: ip,
+    user_agent: userAgent,
   };
 };
 

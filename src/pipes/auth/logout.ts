@@ -9,15 +9,15 @@ export const LogoutPipe = async (
   c: Context
 ): Promise<AuthLogout> => {
   // Extract fields that should not be validated by Zod
-  const { ip, userAgent, ...validationBody } = body as any;
-  const requestMetadata = { ip, userAgent };
+  const { ip_address, user_agent, ...validationBody } = body as any;
+  const requestMetadata = { ip_address, user_agent };
 
   const validate = await LogoutValidation.safeParseAsync(validationBody);
   if (!validate.success) {
     const error: any = "error" in validate ? validate.error.format() : null;
     throw new HTTPException(422, {
       res: error,
-      message: "validation error",
+      message: error._errors[0] || "Invalid input",
     });
   }
 
