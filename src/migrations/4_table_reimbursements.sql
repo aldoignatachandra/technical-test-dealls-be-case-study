@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS public.reimbursements (
     id uuid NOT NULL DEFAULT gen_random_uuid(),
     employee_id uuid NOT NULL,
-    amount numeric NOT NULL,
+    amount numeric(12,2) NOT NULL,
     description text,
     submitted_at timestamp with time zone NOT NULL DEFAULT now(),
     payroll_period_id uuid,  -- ties to a payroll cycle

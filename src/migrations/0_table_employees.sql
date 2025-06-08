@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS public.employees (
     username varchar(255) NOT NULL UNIQUE,
     name varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
-    salary numeric NOT NULL,
+    salary numeric(12,2) NOT NULL,
     role varchar(50) NOT NULL, -- e.g., 'admin' or 'employee'
     token text NULL DEFAULT '', -- JWT token for authentication
     created_at timestamp with time zone NOT NULL DEFAULT now(),

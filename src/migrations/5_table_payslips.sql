@@ -3,11 +3,11 @@ CREATE TABLE IF NOT EXISTS public.payslips (
     id uuid NOT NULL DEFAULT gen_random_uuid(),
     employee_id uuid NOT NULL,
     payroll_period_id uuid NOT NULL,
-    base_salary numeric NOT NULL,
-    attendance_bonus numeric,        -- prorated adjustment based on attendance
-    overtime_amount numeric,         -- calculated using double rate based on overtime hours
-    reimbursement_total numeric,
-    total_take_home numeric,         -- sum of all components
+    base_salary numeric(12,2) NOT NULL,
+    attendance_bonus numeric(12,2),        -- prorated adjustment based on attendance
+    overtime_amount numeric(12,2),         -- calculated using double rate based on overtime hours
+    reimbursement_total numeric(12,2),
+    total_take_home numeric(12,2),         -- sum of all components
     generated_at timestamp with time zone NOT NULL DEFAULT now(),
     created_at timestamp with time zone NOT NULL DEFAULT now(),
     updated_at timestamp with time zone NOT NULL DEFAULT now(),
