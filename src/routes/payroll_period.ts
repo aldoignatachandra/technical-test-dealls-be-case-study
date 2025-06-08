@@ -5,6 +5,14 @@ import { addRequestInfoToBody } from "../helpers/info";
 
 const payrollPeriod = new Hono<{ Variables: UserMiddleware }>();
 
+payrollPeriod.get("/:id", async (c) => {
+  return c.json(await controller.showPayrollPeriod(c));
+});
+
+payrollPeriod.get("/", async (c) => {
+  return c.json(await controller.indexPayrollPeriod(c));
+});
+
 payrollPeriod.post("/", async (c) => {
   const body = await addRequestInfoToBody(c);
   return c.json(await controller.createPayrollPeriod(body, c.get("user")), 201);

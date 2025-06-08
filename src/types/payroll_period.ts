@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { statusPayrollPeriod } from "../helpers/constant";
 import { CreatePayrollPeriodValidation } from "../validations/payroll_period";
+import { SearchValidation } from "../validations/payroll_period";
 
 export type PayrollStatus = (typeof statusPayrollPeriod)[number];
 
@@ -18,3 +19,5 @@ export type PayrollPeriodData = {
 };
 
 export type CreatePayrollPeriod = z.infer<typeof CreatePayrollPeriodValidation>;
+
+export type PayrollPeriodSearch = z.infer<typeof SearchValidation>;
