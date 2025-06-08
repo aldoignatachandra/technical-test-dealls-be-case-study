@@ -32,27 +32,6 @@ export const StoreBuilder = async (
   return data.id;
 };
 
-export const CheckOverlappingPeriods = async (
-  startDate: Date,
-  endDate: Date
-): Promise<boolean> => {
-  const queryCount = {
-    text: `
-      SELECT COUNT(*) as count 
-      FROM public.payroll_periods 
-      WHERE 
-      (start_date <= $1 AND end_date >= $1) OR 
-      (start_date <= $2 AND end_date >= $2) OR 
-      (start_date >= $1 AND end_date <= $2)
-    `,
-    values: [endDate, startDate],
-  };
-
-  const data = (await db.query(queryCount)).rows[0];
-
-  return parseInt(data.count) > 0;
-};
-
 export const SearchPayrollPeriodBuilder = async (
   params: PayrollPeriodSearch
 ): Promise<SearchQuery> => {
@@ -97,4 +76,36 @@ export const ShowBuilder = async (
   };
 
   return (await db.query(queryShow)).rows[0];
+};
+
+export const CheckOverlappingPeriods = async (
+  startDate: Date,
+  endDate: Date
+): Promise<boolean> => {
+  const queryCount = {
+    text: `
+      SELECT COUNT(*) as count 
+      FROM ${table} 
+      WHERE 
+      (start_date <= $1 AND end_date >= $1) OR 
+      (start_date <= $2 AND end_date >= $2) OR 
+      (start_date >= $1 AND end_date <= $2)
+    `,
+    values: [endDate, startDate],
+  };
+
+  const data = (await db.query(queryCount)).rows[0];
+
+  return parseInt(data.count) > 0;
+};
+
+export const CheckAvailablePayrollPeriodByDate = async (
+  attendanceDate: Date
+): Promise<string | null> => {
+  const queryCount = {
+    text: `SELECT id FROM ${table} WHERE start_date <= $1 AND end_date >= $1 AND status = 'open' LIMIT 1`,
+    values: [attendanceDate],
+  };
+
+  return (await db.query(queryCount)).rows[0];
 };

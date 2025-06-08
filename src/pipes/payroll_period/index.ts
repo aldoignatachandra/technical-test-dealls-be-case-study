@@ -1,3 +1,3 @@
-export * from "./create_payroll_period";
+export * from "./create";
 export * from "./checker";
 export * from "./search";

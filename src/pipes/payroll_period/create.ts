@@ -20,7 +20,7 @@ export const CreatePayrollPeriodPipe = async (
 
     let errorMessage = "Validation error";
 
-    // Check if there are custom errors in the username or password fields
+    // Check if there are custom errors in the validation result
     if (error?.start_date?._errors?.length > 0) {
       errorMessage = error.start_date._errors[0];
     } else if (error?.end_date?._errors?.length > 0) {
