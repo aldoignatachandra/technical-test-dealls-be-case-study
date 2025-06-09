@@ -9,6 +9,7 @@ dist
 *.tgz
 
 # code coverage
+.nyc_output
 coverage
 *.lcov
 
