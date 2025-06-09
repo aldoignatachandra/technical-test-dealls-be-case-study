@@ -6,3 +6,4 @@ export * from "./payroll_period";
 export * from "./attendance";
 export * from "./overtime";
 export * from "./reimbursement";
+export * from "./payroll";

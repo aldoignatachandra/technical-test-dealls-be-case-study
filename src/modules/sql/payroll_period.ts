@@ -12,6 +12,7 @@ import { escapeIdentifier } from "pg";
 import { tableName } from "../../helpers/constant";
 
 const table = escapeIdentifier(tableName.PAYROLL_PERIODS);
+const tableAttendance = escapeIdentifier(tableName.ATTENDANCE);
 const db = new Pool(pgConnection);
 
 export const StoreBuilder = async (
@@ -108,4 +109,16 @@ export const CheckAvailablePayrollPeriodByDate = async (
   };
 
   return (await db.query(queryCount)).rows[0];
+};
+
+export const CheckTotalAttendanceInPayrollPeriod = async (
+  payrollPeriodId: string
+): Promise<number> => {
+  const queryCount = {
+    text: `SELECT COUNT(*) as count FROM ${tableAttendance} WHERE payroll_period_id = $1`,
+    values: [payrollPeriodId],
+  };
+
+  const data = (await db.query(queryCount)).rows[0];
+  return parseInt(data.count);
 };

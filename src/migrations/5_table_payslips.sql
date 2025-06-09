@@ -4,13 +4,19 @@ CREATE TABLE IF NOT EXISTS public.payslips (
     employee_id uuid NOT NULL,
     payroll_period_id uuid NOT NULL,
     base_salary numeric(12,2) NOT NULL,
-    attendance_bonus numeric(12,2),        -- prorated adjustment based on attendance
-    overtime_amount numeric(12,2),         -- calculated using double rate based on overtime hours
-    reimbursement_total numeric(12,2),
+    month_working_days int NOT NULL,
+    attendance_count int NOT NULL,
+    attendance_amount numeric(12,2) NOT NULL,
+    overtime_hours numeric(5,2) NOT NULL DEFAULT 0,
+    overtime_amount numeric(12,2) NOT NULL DEFAULT 0,
+    reimbursement_amount numeric(12,2) NOT NULL DEFAULT 0,
+    total_amount numeric(12,2) NOT NULL,
     total_take_home numeric(12,2),         -- sum of all components
     generated_at timestamp with time zone NOT NULL DEFAULT now(),
     created_at timestamp with time zone NOT NULL DEFAULT now(),
+    created_by uuid,       -- nullable; references employees.id for audit
     updated_at timestamp with time zone NOT NULL DEFAULT now(),
+    updated_by uuid,       -- nullable; references employees.id for audit
     CONSTRAINT payslips_pk PRIMARY KEY (id),
     CONSTRAINT fk_payslips_employee FOREIGN KEY (employee_id) REFERENCES public.employees(id),
     CONSTRAINT fk_payslips_payroll FOREIGN KEY (payroll_period_id) REFERENCES public.payroll_periods(id)
@@ -19,6 +25,9 @@ CREATE TABLE IF NOT EXISTS public.payslips (
 -- Indexes for payslips table
 CREATE INDEX IF NOT EXISTS idx_payslips_employee ON public.payslips(employee_id);
 CREATE INDEX IF NOT EXISTS idx_payslips_payroll ON public.payslips(payroll_period_id);
+
+-- Enforce one payslip per employee per payroll period
+CREATE UNIQUE INDEX idx_unique_employee_payroll ON public.payslips(employee_id, payroll_period_id);
 
 -- Create or replace trigger function for automatic timestamps
 CREATE OR REPLACE FUNCTION payslips_update_timestamp()
