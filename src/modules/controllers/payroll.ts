@@ -2,7 +2,7 @@ import { Context, HonoRequest } from "hono";
 import * as service from "../services/payroll";
 import { GeneralResponse, UserRes } from "../../types";
 import { CreatePayrollPipe } from "../../pipes/payroll";
-import { CheckerPipe } from "../../pipes/payroll/checker";
+import { CheckerPipe, SummaryPipe } from "../../pipes/payroll";
 
 export const processPayroll = async (
   body: HonoRequest,
@@ -21,10 +21,10 @@ export const showDetailPayslips = async (
   return { message: null, data, code: 200 };
 };
 
-// export const getPayrollSummary = async (
-//   body: HonoRequest,
-//   user: UserRes
-// ): Promise<GeneralResponse> => {
-//   const data = await service.SummaryPayslipsByPeriod(body, user);
-//   return { message: null, data, code: 200 };
-// };
+export const getPayrollSummary = async (
+  c: Context
+): Promise<GeneralResponse> => {
+  const validation = await SummaryPipe(c);
+  const data = await service.SummaryPayslipsByPeriod(validation, c.get("user"));
+  return { message: null, data, code: 200 };
+};

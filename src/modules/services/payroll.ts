@@ -6,9 +6,15 @@ import {
   EmployeePayslip,
   IdParam,
   PayrollData,
+  PayrollPeriodData,
   UserRes,
 } from "../../types";
-import { ShowBuilder, ShowDetailPayslipsBuilder, StoreBuilder } from "../sql/payroll";
+import {
+  ShowBuilder,
+  StoreBuilder,
+  ShowDetailPayslipsByPeriodBuilder,
+  EmployeeSummaryByPeriodBuilder,
+} from "../sql/payroll";
 import { createAuditLog } from "./audit_log";
 import { actionType, tableName, moduleName } from "../../helpers/constant";
 
@@ -60,5 +66,12 @@ export const showDetailPayslips = async (
   body: PayrollData,
   user: UserRes
 ): Promise<EmployeePayslip> => {
-  return await ShowDetailPayslipsBuilder(body, user);
+  return await ShowDetailPayslipsByPeriodBuilder(body, user);
+};
+
+export const SummaryPayslipsByPeriod = async (
+  body: PayrollPeriodData,
+  user: UserRes
+): Promise<any> => {
+  return await EmployeeSummaryByPeriodBuilder(body, user);
 };

@@ -12,14 +12,13 @@ payroll.post("/process", async (c) => {
 });
 
 // Get data payslips for a payroll period
-payroll.get("/payslips/:id", async (c) => {
+payroll.get("/payslips/:payroll_period_id", async (c) => {
   return c.json(await controller.showDetailPayslips(c));
 });
 
-// // Get all summary of all employee payslips
-// payroll.get("/summary", async (c) => {
-//   const body = await addRequestInfoToBody(c);
-//   return c.json(await controller.getPayrollSummary(body, c.get("user")), 200);
-// });
+// Get all summary of all employee payslips
+payroll.get("/summary/:payroll_period_id", async (c) => {
+  return c.json(await controller.getPayrollSummary(c), 200);
+});
 
 export const payrollRoute = payroll;

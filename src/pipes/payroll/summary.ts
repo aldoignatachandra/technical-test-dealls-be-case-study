@@ -1,11 +1,11 @@
-import { Context, HonoRequest } from "hono";
+import { Context } from "hono";
 import { HTTPException } from "hono/http-exception";
-import { PayrollData } from "../../types";
+import { PayrollPeriodData } from "../../types";
 import { idValidation } from "../../validations/general";
 import { show as checkPayrollPeriod } from "../../modules/services/payroll_period";
-import { show as checkEmployeePayslip } from "../../modules/services/payroll";
+import { role } from "../../helpers/constant";
 
-export const CheckerPipe = async (c: Context): Promise<PayrollData> => {
+export const SummaryPipe = async (c: Context): Promise<PayrollPeriodData> => {
   const body = { id: c.req.param("payroll_period_id") };
 
   const validate = await idValidation.safeParseAsync(body);
@@ -17,6 +17,15 @@ export const CheckerPipe = async (c: Context): Promise<PayrollData> => {
     });
   }
 
+  const user = c.get("user");
+
+  // Only Role 'admin' can generate payroll
+  if (user.role !== role.ADMIN) {
+    throw new HTTPException(403, {
+      message: "You do not have permission to generate a payroll",
+    });
+  }
+
   // Check If Payroll Period Exists
   const data = await checkPayrollPeriod(validate.data);
   if (!data) {
@@ -25,25 +34,12 @@ export const CheckerPipe = async (c: Context): Promise<PayrollData> => {
     });
   }
 
-  const user = c.get("user");
-
-  // Check If Payslip for user login already generated or not
-  const payslip = await checkEmployeePayslip({
-    payroll_period_id: validate.data.id,
-    employee_id: user.id,
-  });
-  if (!payslip) {
-    throw new HTTPException(404, {
-      message: "employee payslip not found",
+  // Check If Payroll Period Status is Closed or Not
+  if (data.status !== "closed") {
+    throw new HTTPException(400, {
+      message: "payroll period must be closed before generating summary",
     });
   }
 
-  // Check if the payslip belongs to the logged-in user
-  if (payslip.employee_id !== user.id) {
-    throw new HTTPException(403, {
-      message: "you are not allowed to access this payslip",
-    });
-  }
-
-  return payslip;
+  return data;
 };

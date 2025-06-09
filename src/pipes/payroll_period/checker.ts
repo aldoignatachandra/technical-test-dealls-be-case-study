@@ -5,7 +5,9 @@ import { idValidation } from "../../validations/general";
 import { show } from "../../modules/services/payroll_period";
 
 export const CheckerPipe = async (c: Context): Promise<PayrollPeriodData> => {
-  const validate = await idValidation.safeParseAsync(c.req.param());
+  const body = { id: c.req.param("payroll_period_id") };
+
+  const validate = await idValidation.safeParseAsync(body);
   if (!validate.success) {
     const error: any = "error" in validate ? validate.error.format() : null;
     throw new HTTPException(422, {
