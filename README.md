@@ -61,7 +61,7 @@ This project includes a Postman collection that documents all available API endp
 
 ### 📁 Using the Postman Collection
 
-Import the collection from `api_doc/Employee_Management_API.postman_collection.json` into Postman
+Import the collection from `api_doc/api_documentation.postman_collection.json` into Postman
 
 ### 🔐 Authorization
 
