@@ -38,3 +38,74 @@ export type CreatePayslipResponse = {
   employee_id: string;
   total_amount: number;
 };
+
+export type CheckEmployeePayslip = {
+  payroll_period_id: string;
+  employee_id: string;
+};
+
+export type PayslipAttendance = {
+  working_days: number;
+  attended_days: number;
+  attendance_rate: number;
+  dates: string[];
+  amount: number;
+};
+
+export type OvertimeEntry = {
+  date: string;
+  hours: number;
+  amount: number;
+  notes?: string;
+};
+
+export type PayslipOvertime = {
+  entries: OvertimeEntry[];
+  total_hours: number;
+  multiplier: number;
+  amount: number;
+};
+
+export type ReimbursementEntry = {
+  id: string;
+  date: string;
+  amount: number;
+  description: string;
+  status: string;
+};
+
+export type PayslipReimbursements = {
+  entries: ReimbursementEntry[];
+  amount: number;
+};
+
+export type PayslipSummary = {
+  attendance_amount: number;
+  overtime_amount: number;
+  reimbursement_amount: number;
+  total_take_home_pay: number;
+};
+
+export type EmployeePayslip = {
+  payslip_id: string | null;
+  period: {
+    id: string;
+    start_date: string;
+    end_date: string;
+    status: string;
+  };
+  employee: {
+    id: string;
+    name: string;
+    username: string;
+  };
+  salary: {
+    base_salary: number;
+    daily_rate: number;
+    hourly_rate: number;
+  };
+  attendance: PayslipAttendance;
+  overtime: PayslipOvertime;
+  reimbursements: PayslipReimbursements;
+  summary: PayslipSummary;
+};

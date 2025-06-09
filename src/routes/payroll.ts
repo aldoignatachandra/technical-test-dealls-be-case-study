@@ -11,11 +11,10 @@ payroll.post("/process", async (c) => {
   return c.json(await controller.processPayroll(body, c.get("user")), 201);
 });
 
-// // Get all payslips for a payroll period
-// payroll.get("/payslips", async (c) => {
-//   const body = await addRequestInfoToBody(c);
-//   return c.json(await controller.getPayslipsByPeriod(body, c.get("user")));
-// });
+// Get data payslips for a payroll period
+payroll.get("/payslips/:id", async (c) => {
+  return c.json(await controller.showDetailPayslips(c));
+});
 
 // // Get all summary of all employee payslips
 // payroll.get("/summary", async (c) => {

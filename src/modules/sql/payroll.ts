@@ -1,10 +1,18 @@
 import { Pool } from "pg";
 import { pgConnection } from "../../helpers/constant";
-import { CreatePayrollResponse, CreatePayroll, UserRes } from "../../types";
+import {
+  CreatePayrollResponse,
+  CreatePayroll,
+  UserRes,
+  PayrollData,
+  CheckEmployeePayslip,
+  EmployeePayslip,
+} from "../../types";
 import { escapeIdentifier } from "pg";
 import { tableName } from "../../helpers/constant";
-import { currDate, getWorkingDays } from "../../helpers/times";
+import { currDate, getWorkingDays, isoDate } from "../../helpers/times";
 import { DateTime } from "luxon";
+import { ShowBuilder as ShowPayrollPeriodBuilder } from "../sql/payroll_period";
 
 const tablePayrollPeriod = escapeIdentifier(tableName.PAYROLL_PERIODS);
 const tableEmployee = escapeIdentifier(tableName.EMPLOYEES);
@@ -102,9 +110,9 @@ export const StoreBuilder = async (
 
     // Calculate total amount
     const totalAmount =
-      Number(attendanceAmount) +
-      Number(overtimeAmount) +
-      Number(reimbursementAmount);
+      Number(Math.round(attendanceAmount)) +
+      Number(Math.round(overtimeAmount)) +
+      Number(Math.round(reimbursementAmount));
 
     // Create payslip each employee
     const payslipQuery = {
@@ -124,12 +132,12 @@ export const StoreBuilder = async (
         employee.salary,
         workingDays,
         attendanceCount,
-        attendanceAmount,
+        Math.round(attendanceAmount),
         totalOvertimeHours,
-        overtimeAmount,
-        reimbursementAmount,
-        totalAmount,
-        totalAmount, // Assuming total take home is same as total amount
+        Math.round(overtimeAmount),
+        Math.round(reimbursementAmount),
+        Math.round(totalAmount),
+        Math.round(totalAmount), // Assuming total take home is same as total amount
         currDate(),
         user.id,
         user.id,
@@ -140,7 +148,7 @@ export const StoreBuilder = async (
     payslips.push({
       id: payslipResult.rows[0].id,
       employee_id: employee.id,
-      total_amount: totalAmount,
+      total_amount: Math.round(totalAmount),
     });
   }
 
@@ -165,4 +173,182 @@ export const CheckGeneratedPayroll = async (body: {
   const result = await db.query(query);
 
   return result.rows[0].count > 0;
+};
+
+export const ShowBuilder = async (
+  body: CheckEmployeePayslip
+): Promise<PayrollData> => {
+  const query = {
+    text: `SELECT * FROM ${tablePayslip} WHERE payroll_period_id = $1 AND employee_id = $2 LIMIT 1`,
+    values: [body.payroll_period_id, body.employee_id],
+  };
+  const result = await db.query(query);
+
+  return result.rows[0];
+};
+
+export const ShowDetailPayslipsBuilder = async (
+  body: PayrollData,
+  user: UserRes
+): Promise<EmployeePayslip> => {
+  // Get the payroll period details
+  const period = await ShowPayrollPeriodBuilder({ id: body.payroll_period_id });
+
+  // Get employee details
+  const employeeQuery = {
+    text: `SELECT id, name, username, salary FROM ${tableEmployee} WHERE id = $1`,
+    values: [user.id],
+  };
+
+  const employeeResult = await db.query(employeeQuery);
+  const employee = employeeResult.rows[0];
+
+  // Get attendance data
+  const attendanceQuery = {
+    text: `
+      SELECT attendance_date
+      FROM ${tableAttendance}
+      WHERE employee_id = $1 AND payroll_period_id = $2
+      ORDER BY attendance_date ASC
+    `,
+    values: [user.id, period.id],
+  };
+  const attendanceResult = await db.query(attendanceQuery);
+  const attendanceDates = attendanceResult.rows.map((row) =>
+    isoDate(row.attendance_date)
+  );
+  const attendanceCount = attendanceResult.rowCount;
+
+  // Calculate workdays in the period (excluding weekends)
+  const workdaysCount = getWorkingDays(period.start_date, period.end_date);
+
+  // Calculate daily rate
+  const dailyRate = employee.salary / workdaysCount;
+
+  // Calculate attendance amount
+  const attendanceAmount = attendanceCount * dailyRate;
+
+  // Get overtime data
+  const overtimeQuery = {
+    text: `
+      SELECT overtime_date, hours
+      FROM ${tableOvertime}
+      WHERE employee_id = $1 AND payroll_period_id = $2
+      ORDER BY overtime_date ASC
+    `,
+    values: [user.id, period.id],
+  };
+
+  const overtimeResult = await db.query(overtimeQuery);
+  const overtimeEntries = overtimeResult.rows;
+
+  // Calculate hourly rate (assuming 8-hour workdays)
+  const hourlyRate = dailyRate / 8;
+
+  // Apply overtime multiplier (1.5x for this example)
+  const overtimeMultiplier = 1.5;
+
+  // Calculate total overtime hours and amount
+  let totalOvertimeHours = 0;
+  const overtimeDetails = overtimeEntries.map((entry) => {
+    const hours = parseFloat(entry.hours);
+    totalOvertimeHours += hours;
+    const amount = hours * hourlyRate * overtimeMultiplier;
+
+    return {
+      date: isoDate(entry.overtime_date),
+      hours,
+      amount,
+    };
+  });
+
+  const overtimeAmount = totalOvertimeHours * hourlyRate * overtimeMultiplier;
+
+  // Get reimbursement data
+  const reimbursementQuery = {
+    text: `
+      SELECT id, reimbursement_date, amount, description
+      FROM ${tableReimbursement}
+      WHERE employee_id = $1 AND payroll_period_id = $2
+      ORDER BY reimbursement_date ASC
+    `,
+    values: [user.id, period.id],
+  };
+
+  const reimbursementResult = await db.query(reimbursementQuery);
+  const reimbursements = reimbursementResult.rows.map((item) => ({
+    id: item.id,
+    date: isoDate(item.reimbursement_date),
+    amount: parseFloat(item.amount),
+    description: item.description,
+  }));
+
+  // Calculate total reimbursement amount
+  const reimbursementAmount = reimbursements.reduce(
+    (total, item) => total + parseFloat(item.amount),
+    0
+  );
+
+  const totalTakeHomePay =
+    Number(attendanceAmount) +
+    Number(overtimeAmount) +
+    Number(reimbursementAmount);
+
+  // Check if payslip already exists for this period
+  let payslipId = null;
+  const payslipQuery = {
+    text: `SELECT id FROM ${tablePayslip} WHERE employee_id = $1 AND payroll_period_id = $2`,
+    values: [user.id, period.id],
+  };
+
+  const payslipResult = await db.query(payslipQuery);
+  if (payslipResult.rows.length > 0) {
+    payslipId = payslipResult.rows[0].id;
+  }
+
+  // Format response
+  return {
+    payslip_id: payslipId,
+    period: {
+      id: period.id,
+      start_date: isoDate(period.start_date),
+      end_date: isoDate(period.end_date),
+      status: period.status,
+    },
+    employee: {
+      id: user.id,
+      name: user.name,
+      username: user.username,
+    },
+    salary: {
+      base_salary: Math.round(employee.salary),
+      daily_rate: Math.round(dailyRate),
+      hourly_rate: Math.round(hourlyRate),
+    },
+    attendance: {
+      working_days: workdaysCount,
+      attended_days: attendanceCount,
+      attendance_rate: Number(
+        ((attendanceCount / workdaysCount) * 100).toFixed(2)
+      ),
+      dates: attendanceDates,
+      amount: Math.round(attendanceAmount),
+    },
+    overtime: {
+      entries: overtimeDetails,
+      total_hours: totalOvertimeHours,
+      multiplier: overtimeMultiplier,
+      amount: Math.round(overtimeAmount),
+    },
+    reimbursements: {
+      entries: reimbursements,
+      amount: Math.round(reimbursementAmount),
+    },
+    summary: {
+      attendance_amount: Math.round(attendanceAmount),
+      overtime_amount: Math.round(overtimeAmount),
+      reimbursement_amount: Math.round(reimbursementAmount),
+      total_take_home_pay: Math.round(totalTakeHomePay),
+    },
+  };
 };

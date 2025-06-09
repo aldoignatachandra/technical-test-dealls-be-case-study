@@ -1,6 +1,14 @@
 import { log } from "../../helpers/logger";
-import { CreatePayroll, CreatePayrollResponse, UserRes } from "../../types";
-import { StoreBuilder } from "../sql/payroll";
+import {
+  CheckEmployeePayslip,
+  CreatePayroll,
+  CreatePayrollResponse,
+  EmployeePayslip,
+  IdParam,
+  PayrollData,
+  UserRes,
+} from "../../types";
+import { ShowBuilder, ShowDetailPayslipsBuilder, StoreBuilder } from "../sql/payroll";
 import { createAuditLog } from "./audit_log";
 import { actionType, tableName, moduleName } from "../../helpers/constant";
 
@@ -38,4 +46,19 @@ export const createPayroll = async (
   log(ctx, logMsg, `${user.name}`);
 
   return data;
+};
+
+// Show Minimal Employee Payslips Data
+export const show = async (
+  body: CheckEmployeePayslip
+): Promise<PayrollData> => {
+  return await ShowBuilder(body);
+};
+
+// Show Detail Employee Payslips Data
+export const showDetailPayslips = async (
+  body: PayrollData,
+  user: UserRes
+): Promise<EmployeePayslip> => {
+  return await ShowDetailPayslipsBuilder(body, user);
 };

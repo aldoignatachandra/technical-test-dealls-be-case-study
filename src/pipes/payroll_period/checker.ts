@@ -8,15 +8,13 @@ export const CheckerPipe = async (c: Context): Promise<PayrollPeriodData> => {
   const validate = await idValidation.safeParseAsync(c.req.param());
   if (!validate.success) {
     const error: any = "error" in validate ? validate.error.format() : null;
-
-    console.log("Validation Error:", error);
-
     throw new HTTPException(422, {
       res: error,
       message: error._errors[0] || error.id._errors[0] || "validation error",
     });
   }
 
+  // Check If Payroll Period Exists
   const data = await show(validate.data);
   if (!data) {
     throw new HTTPException(404, {
