@@ -1,0 +1,1615 @@
+{
+	"info": {
+		"_postman_id": "1e4c30ca-eae6-4d31-a461-b38ab5985041",
+		"name": "dealls-backend-case-study",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9117244"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/auth/v1/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"auth",
+										"v1",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 12:50:05 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "600"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"success login user\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5NDczNDA1LCJleHAiOjE3NTAwNzgyMDUsIm5iZiI6MTc0OTQ3MzQwNX0.hW9OtBvR79_e0bgsIC2cjn9nltxlP3RYtxKoef-jWIqMO6z7rmYBPgJUjdHYtCBn7wW9R8vyIxqn4yp4MZkw7w\",\n        \"refresh_token\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5NDczNDA1LCJleHAiOjE3NTIwNjU0MDUsIm5iZiI6MTc0OTQ3MzQwNX0._SKtmpclAX7yV8TPd-kCXMEhorbH9yOihkSASwXOe5nIbDap8bkYx6kkX9bd_tral55yjsXAyvyE6Pbsb_OIsw\"\n    },\n    \"code\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5NDczNDA1LCJleHAiOjE3NTAwNzgyMDUsIm5iZiI6MTc0OTQ3MzQwNX0.hW9OtBvR79_e0bgsIC2cjn9nltxlP3RYtxKoef-jWIqMO6z7rmYBPgJUjdHYtCBn7wW9R8vyIxqn4yp4MZkw7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"a8915a59-ccb7-4c32-8fdc-de8f42036e64\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/v1/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"v1",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"a8915a59-ccb7-4c32-8fdc-de8f42036e64\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/auth/v1/logout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"auth",
+										"v1",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 12:51:57 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"success logout user\",\n    \"data\": null,\n    \"code\": 200\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payroll Period",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5Mzk1ODEwLCJleHAiOjE3NTAwMDA2MTAsIm5iZiI6MTc0OTM5NTgxMH0.AobL3F062eXjA8jmpCyeUTYQr_aE4VDqXgjT5Ij4Y9moeYoudV5hx9oLNsr_m9xkK7sM9UnZTzo94SilCjcqpA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"start_date\": \"01-07-2025\",\n    \"end_date\": \"31-07-2025\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/payroll-period/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"payroll-period",
+								"v1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"start_date\": \"01-07-2025\",\n    \"end_date\": \"31-07-2025\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/payroll-period/v1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"payroll-period",
+										"v1"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 12:53:22 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "104"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"success create new payroll period\",\n    \"data\": \"f9a7a7ca-c8f1-4039-98f2-d525d97453b9\",\n    \"code\": 201\n}"
+						},
+						{
+							"name": "422 - Error Overlap",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"start_date\": \"01-06-2025\",\n    \"end_date\": \"30-06-2025\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/payroll-period/v1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"payroll-period",
+										"v1"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 12:52:26 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "457"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Payroll period overlaps with existing periods\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: Payroll period overlaps with existing periods\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/payroll_period/create.ts:52:15)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5NDUxNDgzLCJleHAiOjE3NTAwNTYyODMsIm5iZiI6MTc0OTQ1MTQ4M30.lXZAtyxG3_DN9Ll69g2C1l82e3oS90zyJ8jlmYdc1f_EUppv8ksnQ1Oaf8UvQhjRtBLZ5iou5ETjeQo73FwdYw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/payroll-period/v1/:payroll_period_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"payroll-period",
+								"v1",
+								":payroll_period_id"
+							],
+							"variable": [
+								{
+									"key": "payroll_period_id",
+									"value": "1d421d9f-5ad1-4aa6-832a-f4ca76898892"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/payroll-period/v1/:payroll_period_id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"payroll-period",
+										"v1",
+										":payroll_period_id"
+									],
+									"variable": [
+										{
+											"key": "payroll_period_id",
+											"value": "1d421d9f-5ad1-4aa6-832a-f4ca76898892"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 12:53:44 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "456"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": null,\n    \"data\": {\n        \"id\": \"1d421d9f-5ad1-4aa6-832a-f4ca76898892\",\n        \"start_date\": \"2025-05-31T17:00:00.000Z\",\n        \"end_date\": \"2025-06-29T17:00:00.000Z\",\n        \"status\": \"closed\",\n        \"created_at\": \"2025-06-08T15:17:06.217Z\",\n        \"updated_at\": \"2025-06-09T08:58:32.218Z\",\n        \"created_by\": \"a8915a59-ccb7-4c32-8fdc-de8f42036e64\",\n        \"updated_by\": \"a8915a59-ccb7-4c32-8fdc-de8f42036e64\",\n        \"processed_at\": \"2025-06-09T08:58:32.218Z\",\n        \"processed_by\": \"a8915a59-ccb7-4c32-8fdc-de8f42036e64\"\n    },\n    \"code\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJhN2ZlNWQtY2FmZC00MjNlLTlkYWItNGFjZWY1ZTQxZjEzIiwiaWF0IjoxNzQ5NDUyMTIyLCJleHAiOjE3NTAwNTY5MjIsIm5iZiI6MTc0OTQ1MjEyMn0.LDS8y2MH5uf63xDIzotWtAYNJVQLL4LIYlvzovbGRI29RLtGoB7QASo_saHaFoOBnL3vo2tzosWScQJYNeNgMQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/payroll-period/v1?status=&limit=10&page=1&sort_by=created_at&sort_type=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"payroll-period",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "",
+									"description": "optional: [\"open\" / \"closed\" / \"processed\"]"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "optional ( default = 10 )"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "optional ( default = 1 )"
+								},
+								{
+									"key": "sort_by",
+									"value": "created_at",
+									"description": "optional ( default = created_at )"
+								},
+								{
+									"key": "sort_type",
+									"value": "desc",
+									"description": "optional ( default = DESC )"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/payroll-period/v1?status=&limit=10&page=1&sort_by=created_at&sort_type=desc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"payroll-period",
+										"v1"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "",
+											"description": "optional: [\"open\" / \"closed\" / \"processed\"]"
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "optional ( default = 10 )"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"description": "optional ( default = 1 )"
+										},
+										{
+											"key": "sort_by",
+											"value": "created_at",
+											"description": "optional ( default = created_at )"
+										},
+										{
+											"key": "sort_type",
+											"value": "desc",
+											"description": "optional ( default = DESC )"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 12:54:03 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "902"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": null,\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": \"f9a7a7ca-c8f1-4039-98f2-d525d97453b9\",\n                \"start_date\": \"2025-06-30T17:00:00.000Z\",\n                \"end_date\": \"2025-07-30T17:00:00.000Z\",\n                \"status\": \"open\",\n                \"created_at\": \"2025-06-09T12:53:22.479Z\",\n                \"updated_at\": \"2025-06-09T12:53:22.479Z\",\n                \"created_by\": \"a8915a59-ccb7-4c32-8fdc-de8f42036e64\",\n                \"updated_by\": \"a8915a59-ccb7-4c32-8fdc-de8f42036e64\",\n                \"processed_at\": null,\n                \"processed_by\": null\n            },\n            {\n                \"id\": \"1d421d9f-5ad1-4aa6-832a-f4ca76898892\",\n                \"start_date\": \"2025-05-31T17:00:00.000Z\",\n                \"end_date\": \"2025-06-29T17:00:00.000Z\",\n                \"status\": \"closed\",\n                \"created_at\": \"2025-06-08T15:17:06.217Z\",\n                \"updated_at\": \"2025-06-09T08:58:32.218Z\",\n                \"created_by\": \"a8915a59-ccb7-4c32-8fdc-de8f42036e64\",\n                \"updated_by\": \"a8915a59-ccb7-4c32-8fdc-de8f42036e64\",\n                \"processed_at\": \"2025-06-09T08:58:32.218Z\",\n                \"processed_by\": \"a8915a59-ccb7-4c32-8fdc-de8f42036e64\"\n            }\n        ],\n        \"total\": 2,\n        \"per_page\": 10,\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"from\": 1,\n        \"to\": 2\n    },\n    \"code\": 200\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payroll",
+			"item": [
+				{
+					"name": "Generate Payslips",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5NDM3ODg1LCJleHAiOjE3NTAwNDI2ODUsIm5iZiI6MTc0OTQzNzg4NX0.rrjLuAFMW7CIsD0Uy5QlOna-IY6vCZRTBEB6gaHZyzIwm9zvHccBJVuxnVC-H_0hiPT7uFKg6j1j5ExnXaSm_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payroll_period_id\": \"1d421d9f-5ad1-4aa6-832a-f4ca76898892\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/payroll/v1/process",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"payroll",
+								"v1",
+								"process"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"payroll_period_id\": \"1d421d9f-5ad1-4aa6-832a-f4ca76898892\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/payroll/v1/process",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"payroll",
+										"v1",
+										"process"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 08:58:31 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "397"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"success generate payroll\",\n    \"data\": {\n        \"payroll_period_id\": \"1d421d9f-5ad1-4aa6-832a-f4ca76898892\",\n        \"processed_at\": \"2025-06-09T08:58:32.244Z\",\n        \"payslips_count\": 3,\n        \"payslips\": [\n            {\n                \"id\": \"183c99c6-2097-45bd-a31b-ec3f21100890\",\n                \"total_amount\": 2050000\n            },\n            {\n                \"id\": \"f94d2e19-6bfd-4fa0-b72e-1ad8b829e348\",\n                \"total_amount\": 952381\n            },\n            {\n                \"id\": \"59a8c06b-48bd-4f1b-963f-ea14c99bb11e\",\n                \"total_amount\": 1190476\n            }\n        ]\n    },\n    \"code\": 201\n}"
+						},
+						{
+							"name": "400 - Already Generated",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"payroll_period_id\": \"1d421d9f-5ad1-4aa6-832a-f4ca76898892\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/payroll/v1/process",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"payroll",
+										"v1",
+										"process"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 13:06:21 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "460"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Payroll for this period has already been generated\",\n    \"data\": null,\n    \"code\": 400,\n    \"stack\": \"Error: Payroll for this period has already been generated\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/payroll/create.ts:42:15)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Payslips",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJkZWE3NzQtMzc2Ni00MjdjLWJhYTktMDc0MTVkZDM2YTg5IiwiaWF0IjoxNzQ5NDU5NTU1LCJleHAiOjE3NTAwNjQzNTUsIm5iZiI6MTc0OTQ1OTU1NX0.k0R51Sag5tbnfWv0zVcnCOvrQ9s53hLoPYijW0bFe5v9m4Z2UxFozs5QA-ToFNHD9HKZuQkwM3X1WScH2OIJzQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payroll_period_id\": \"1d421d9f-5ad1-4aa6-832a-f4ca76898892\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/payroll/v1/payslips/:payroll_period_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"payroll",
+								"v1",
+								"payslips",
+								":payroll_period_id"
+							],
+							"variable": [
+								{
+									"key": "payroll_period_id",
+									"value": "1d421d9f-5ad1-4aa6-832a-f4ca76898892"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"payroll_period_id\": \"1d421d9f-5ad1-4aa6-832a-f4ca76898892\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/payroll/v1/payslips/:payroll_period_id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"payroll",
+										"v1",
+										"payslips",
+										":payroll_period_id"
+									],
+									"variable": [
+										{
+											"key": "payroll_period_id",
+											"value": "1d421d9f-5ad1-4aa6-832a-f4ca76898892"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 09:16:55 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "777"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": null,\n    \"data\": {\n        \"payslip_id\": \"f94d2e19-6bfd-4fa0-b72e-1ad8b829e348\",\n        \"period\": {\n            \"id\": \"1d421d9f-5ad1-4aa6-832a-f4ca76898892\",\n            \"start_date\": \"2025-06-01\",\n            \"end_date\": \"2025-06-30\",\n            \"status\": \"closed\"\n        },\n        \"employee\": {\n            \"id\": \"62dea774-3766-427c-baa9-07415dd36a89\",\n            \"name\": \"Employee 2\",\n            \"username\": \"employee_2\"\n        },\n        \"salary\": {\n            \"base_salary\": 4000000,\n            \"daily_rate\": 190476,\n            \"hourly_rate\": 23810\n        },\n        \"attendance\": {\n            \"working_days\": 21,\n            \"attended_days\": 5,\n            \"attendance_rate\": 23.81,\n            \"dates\": [\n                \"2025-06-02\",\n                \"2025-06-03\",\n                \"2025-06-04\",\n                \"2025-06-05\",\n                \"2025-06-06\"\n            ],\n            \"amount\": 952381\n        },\n        \"overtime\": {\n            \"entries\": [],\n            \"total_hours\": 0,\n            \"multiplier\": 1.5,\n            \"amount\": 0\n        },\n        \"reimbursements\": {\n            \"entries\": [],\n            \"amount\": 0\n        },\n        \"summary\": {\n            \"attendance_amount\": 952381,\n            \"overtime_amount\": 0,\n            \"reimbursement_amount\": 0,\n            \"total_take_home_pay\": 952381\n        }\n    },\n    \"code\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Summary",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5NDM3ODg1LCJleHAiOjE3NTAwNDI2ODUsIm5iZiI6MTc0OTQzNzg4NX0.rrjLuAFMW7CIsD0Uy5QlOna-IY6vCZRTBEB6gaHZyzIwm9zvHccBJVuxnVC-H_0hiPT7uFKg6j1j5ExnXaSm_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/payroll/v1/summary/:payroll_period_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"payroll",
+								"v1",
+								"summary",
+								":payroll_period_id"
+							],
+							"variable": [
+								{
+									"key": "payroll_period_id",
+									"value": "1d421d9f-5ad1-4aa6-832a-f4ca76898892"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/payroll/v1/summary/:payroll_period_id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"payroll",
+										"v1",
+										"summary",
+										":payroll_period_id"
+									],
+									"variable": [
+										{
+											"key": "payroll_period_id",
+											"value": "1d421d9f-5ad1-4aa6-832a-f4ca76898892"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 10:16:55 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30118"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": null,\n    \"data\": {\n        \"period\": {\n            \"id\": \"1d421d9f-5ad1-4aa6-832a-f4ca76898892\",\n            \"start_date\": \"2025-05-31T17:00:00.000Z\",\n            \"end_date\": \"2025-06-29T17:00:00.000Z\",\n            \"status\": \"closed\"\n        },\n        \"summary\": {\n            \"employee_count\": 100,\n            \"total_base_salary\": 678000000,\n            \"total_attendance_amount\": 3809523,\n            \"total_overtime_amount\": 321429,\n            \"total_reimbursement_amount\": 300000,\n            \"grand_total\": 4430952\n        },\n        \"employees\": [\n            {\n                \"employee_id\": \"62a7fe5d-cafd-423e-9dab-4acef5e41f13\",\n                \"name\": \"Employee 1\",\n                \"username\": \"employee_1\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 5,\n                    \"attendance_rate\": \"23.81%\",\n                    \"amount\": 1428571\n                },\n                \"overtime\": {\n                    \"hours\": \"6.00\",\n                    \"amount\": 321429\n                },\n                \"reimbursement\": {\n                    \"amount\": 300000\n                },\n                \"take_home_pay\": 2050000\n            },\n            {\n                \"employee_id\": \"9c83688b-6614-4a52-af1f-4370c1c3fab0\",\n                \"name\": \"Employee 10\",\n                \"username\": \"employee_10\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"24a7f7da-e02c-4e63-95f4-e4541242a091\",\n                \"name\": \"Employee 100\",\n                \"username\": \"employee_100\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"e35e0334-27ec-41dc-9ddc-1fb512befea8\",\n                \"name\": \"Employee 11\",\n                \"username\": \"employee_11\",\n                \"base_salary\": 9000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"6e8142c8-fe3a-456b-b8eb-b2f07ca8a8f6\",\n                \"name\": \"Employee 12\",\n                \"username\": \"employee_12\",\n                \"base_salary\": 7500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"2594eadf-900b-4f28-8a25-202b7a76e30b\",\n                \"name\": \"Employee 13\",\n                \"username\": \"employee_13\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"473ea6a3-4adc-4f81-a35d-8b4cf655d796\",\n                \"name\": \"Employee 14\",\n                \"username\": \"employee_14\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"5141ac4d-df15-4bbe-bf16-86457af19380\",\n                \"name\": \"Employee 15\",\n                \"username\": \"employee_15\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"45bae526-29f2-4a52-a6f3-d9535cde21ee\",\n                \"name\": \"Employee 16\",\n                \"username\": \"employee_16\",\n                \"base_salary\": 7500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"574ce5ff-15df-40ce-afb0-c99d3ca4fdd7\",\n                \"name\": \"Employee 17\",\n                \"username\": \"employee_17\",\n                \"base_salary\": 7500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"e842ee5d-2bbd-4053-952f-7593073ad17a\",\n                \"name\": \"Employee 18\",\n                \"username\": \"employee_18\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"b74d7a74-ed93-4d14-8fce-565e97780417\",\n                \"name\": \"Employee 19\",\n                \"username\": \"employee_19\",\n                \"base_salary\": 9000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"62dea774-3766-427c-baa9-07415dd36a89\",\n                \"name\": \"Employee 2\",\n                \"username\": \"employee_2\",\n                \"base_salary\": 4000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 5,\n                    \"attendance_rate\": \"23.81%\",\n                    \"amount\": 952381\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 952381\n            },\n            {\n                \"employee_id\": \"26d6bd74-c9ee-4587-aa39-c7a964a2d766\",\n                \"name\": \"Employee 20\",\n                \"username\": \"employee_20\",\n                \"base_salary\": 6500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"beb123e0-11f2-469f-a2d0-713eb72d4dd6\",\n                \"name\": \"Employee 21\",\n                \"username\": \"employee_21\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"f8ca18ad-01a5-4a64-a1a0-7b3194553f7c\",\n                \"name\": \"Employee 22\",\n                \"username\": \"employee_22\",\n                \"base_salary\": 7500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"0c8b5c25-59e5-474c-8ed9-08b4a633de29\",\n                \"name\": \"Employee 23\",\n                \"username\": \"employee_23\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"4c3e394f-e332-4a5f-bb25-8c886c472214\",\n                \"name\": \"Employee 24\",\n                \"username\": \"employee_24\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"4033c5c2-0711-42c9-83b0-66e6ff8ffd62\",\n                \"name\": \"Employee 25\",\n                \"username\": \"employee_25\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"d0183293-e0f0-4354-a5a6-c0af3444d489\",\n                \"name\": \"Employee 26\",\n                \"username\": \"employee_26\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"e82ab07c-501a-4e85-973f-805cadc05aa6\",\n                \"name\": \"Employee 27\",\n                \"username\": \"employee_27\",\n                \"base_salary\": 6500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"7fe9e9dd-7603-4512-a4d4-ee0b5de06ffe\",\n                \"name\": \"Employee 28\",\n                \"username\": \"employee_28\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"a4164bc0-1780-4ad5-8b2d-78ae8d832592\",\n                \"name\": \"Employee 29\",\n                \"username\": \"employee_29\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"79de5232-3324-4ba3-8ac0-c928be573f1f\",\n                \"name\": \"Employee 3\",\n                \"username\": \"employee_3\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 6,\n                    \"attendance_rate\": \"28.57%\",\n                    \"amount\": 1428571\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 1428571\n            },\n            {\n                \"employee_id\": \"483a7621-97cd-4196-83fe-8a0d5f29661f\",\n                \"name\": \"Employee 30\",\n                \"username\": \"employee_30\",\n                \"base_salary\": 6500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"a1d0f2dc-0cfd-4f93-8952-8760d3f9619d\",\n                \"name\": \"Employee 31\",\n                \"username\": \"employee_31\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"4fc3b154-ed45-48e9-af8d-e8748cfdb2f3\",\n                \"name\": \"Employee 32\",\n                \"username\": \"employee_32\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"0943a309-9ddf-4259-91dc-52da17039049\",\n                \"name\": \"Employee 33\",\n                \"username\": \"employee_33\",\n                \"base_salary\": 7000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"6fa73511-1bff-46ee-80fb-19bc16e25839\",\n                \"name\": \"Employee 34\",\n                \"username\": \"employee_34\",\n                \"base_salary\": 6500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"a29ecc9a-cd19-4a27-b438-dc78c23374d1\",\n                \"name\": \"Employee 35\",\n                \"username\": \"employee_35\",\n                \"base_salary\": 7000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"40ccb4ce-5919-4926-9004-31bb73d4793e\",\n                \"name\": \"Employee 36\",\n                \"username\": \"employee_36\",\n                \"base_salary\": 8000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"ece69a59-6d9e-4574-86df-7d58d0f2720f\",\n                \"name\": \"Employee 37\",\n                \"username\": \"employee_37\",\n                \"base_salary\": 7000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"d93ea83e-47f5-4b7b-aa37-bf27a1c5fb45\",\n                \"name\": \"Employee 38\",\n                \"username\": \"employee_38\",\n                \"base_salary\": 8000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"0d97b9ed-5a73-4559-86c0-cdc9038cfdcc\",\n                \"name\": \"Employee 39\",\n                \"username\": \"employee_39\",\n                \"base_salary\": 9000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"d092f474-133d-41f7-a129-3ccb25e850c1\",\n                \"name\": \"Employee 4\",\n                \"username\": \"employee_4\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"52570281-a772-49f1-9a81-2a0c6b069c47\",\n                \"name\": \"Employee 40\",\n                \"username\": \"employee_40\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"47306460-ec7a-415d-9df0-3c78770c7112\",\n                \"name\": \"Employee 41\",\n                \"username\": \"employee_41\",\n                \"base_salary\": 9000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"c50a9302-12c8-4f36-8f19-9c2834013d67\",\n                \"name\": \"Employee 42\",\n                \"username\": \"employee_42\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"14985ba6-4e56-4964-9f15-8bbe9eeddf9a\",\n                \"name\": \"Employee 43\",\n                \"username\": \"employee_43\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"0778be87-42c2-4085-b00b-c401ef00d8b5\",\n                \"name\": \"Employee 44\",\n                \"username\": \"employee_44\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"83ce9b70-eb07-407f-89c8-8a13497c5386\",\n                \"name\": \"Employee 45\",\n                \"username\": \"employee_45\",\n                \"base_salary\": 6500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"23a60d9b-8019-438f-a3af-fc167811bb91\",\n                \"name\": \"Employee 46\",\n                \"username\": \"employee_46\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"c4d248a8-7e4e-4a28-88cf-5f1d6677e00e\",\n                \"name\": \"Employee 47\",\n                \"username\": \"employee_47\",\n                \"base_salary\": 7000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"abf4a524-a7b3-42b4-a530-c06b3dadf33e\",\n                \"name\": \"Employee 48\",\n                \"username\": \"employee_48\",\n                \"base_salary\": 8000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"87c4c3db-48f5-44ac-8791-1a8e39c300c1\",\n                \"name\": \"Employee 49\",\n                \"username\": \"employee_49\",\n                \"base_salary\": 7000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"5744b021-586d-432e-ae48-4fc103bfab5f\",\n                \"name\": \"Employee 5\",\n                \"username\": \"employee_5\",\n                \"base_salary\": 9000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"5fcbe1e6-d38b-4f01-8800-22bc6f27802c\",\n                \"name\": \"Employee 50\",\n                \"username\": \"employee_50\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"b0380d6f-9fdf-4051-bb64-94b74f6bd707\",\n                \"name\": \"Employee 51\",\n                \"username\": \"employee_51\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"0f12218a-4683-4457-8aad-41cee374e4b1\",\n                \"name\": \"Employee 52\",\n                \"username\": \"employee_52\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"f447e778-a1a4-4ca0-89d4-ff2ece2bc46a\",\n                \"name\": \"Employee 53\",\n                \"username\": \"employee_53\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"6e20bae3-ee48-44af-a357-af1e273a2d9c\",\n                \"name\": \"Employee 54\",\n                \"username\": \"employee_54\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"34dc16aa-e8ca-4183-917c-fc8e53845d0a\",\n                \"name\": \"Employee 55\",\n                \"username\": \"employee_55\",\n                \"base_salary\": 8000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"cc94a8cd-ee77-4f56-aa07-e580543e1c81\",\n                \"name\": \"Employee 56\",\n                \"username\": \"employee_56\",\n                \"base_salary\": 7000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"702fb345-29e7-4c7b-9df3-b1b720b197fa\",\n                \"name\": \"Employee 57\",\n                \"username\": \"employee_57\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"6c69b5e1-598b-4ef5-810f-fc561aa1c61d\",\n                \"name\": \"Employee 58\",\n                \"username\": \"employee_58\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"543367c1-824b-47b7-9a01-a4af383e5107\",\n                \"name\": \"Employee 59\",\n                \"username\": \"employee_59\",\n                \"base_salary\": 9000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"03a6a7cf-3d2b-4d5c-ba54-07eaf80f64d9\",\n                \"name\": \"Employee 6\",\n                \"username\": \"employee_6\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"51f3976e-59e7-45f2-8e43-9e5719b4c8ab\",\n                \"name\": \"Employee 60\",\n                \"username\": \"employee_60\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"86e425fd-7663-45ed-a0cf-1a251551c189\",\n                \"name\": \"Employee 61\",\n                \"username\": \"employee_61\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"ce667572-fb27-4bad-bc86-2306b33ee1ce\",\n                \"name\": \"Employee 62\",\n                \"username\": \"employee_62\",\n                \"base_salary\": 6500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"77b555e4-4245-44d4-9ecc-0821b938f776\",\n                \"name\": \"Employee 63\",\n                \"username\": \"employee_63\",\n                \"base_salary\": 9000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"3c5a6f5a-f7c8-4f2a-bdb7-e7f2c5466611\",\n                \"name\": \"Employee 64\",\n                \"username\": \"employee_64\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"0be5c636-b69b-4ec2-b79a-484a145d9c0a\",\n                \"name\": \"Employee 65\",\n                \"username\": \"employee_65\",\n                \"base_salary\": 7000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"bacf6e94-374b-429a-88bc-9e7f879f494c\",\n                \"name\": \"Employee 66\",\n                \"username\": \"employee_66\",\n                \"base_salary\": 8000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"984250a3-36bf-4f0e-b973-5fec29fa3efa\",\n                \"name\": \"Employee 67\",\n                \"username\": \"employee_67\",\n                \"base_salary\": 7000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"0f4a6acd-6956-4230-869c-45c82f8efa83\",\n                \"name\": \"Employee 68\",\n                \"username\": \"employee_68\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"916c6b14-4275-4bc8-b915-aa7375c6ce8a\",\n                \"name\": \"Employee 69\",\n                \"username\": \"employee_69\",\n                \"base_salary\": 8000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"dcb06726-9fcd-4dd4-bd83-5519112e93dc\",\n                \"name\": \"Employee 7\",\n                \"username\": \"employee_7\",\n                \"base_salary\": 9000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"a86d1f77-dad9-46bb-9d12-2d4b31e0a30b\",\n                \"name\": \"Employee 70\",\n                \"username\": \"employee_70\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"3f79d006-f170-4ccd-a39f-260d27062d13\",\n                \"name\": \"Employee 71\",\n                \"username\": \"employee_71\",\n                \"base_salary\": 7000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"75576c6e-2a2d-4912-9ecb-ab41647584b8\",\n                \"name\": \"Employee 72\",\n                \"username\": \"employee_72\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"3840a11b-9918-4f10-8309-ed6676dd153f\",\n                \"name\": \"Employee 73\",\n                \"username\": \"employee_73\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"2a9c7562-8d0e-40ce-b006-f63150a96a53\",\n                \"name\": \"Employee 74\",\n                \"username\": \"employee_74\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"558ab5e6-937b-425a-8e2a-19d59cd2fb0f\",\n                \"name\": \"Employee 75\",\n                \"username\": \"employee_75\",\n                \"base_salary\": 8000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"cea4d919-d6f9-4449-ba9a-54b9e722ccd0\",\n                \"name\": \"Employee 76\",\n                \"username\": \"employee_76\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"8bf1d57c-6be6-4732-ae8a-87544dd35ec3\",\n                \"name\": \"Employee 77\",\n                \"username\": \"employee_77\",\n                \"base_salary\": 9000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"ea2f5cae-ba30-4825-be09-c4e9eb38ebcb\",\n                \"name\": \"Employee 78\",\n                \"username\": \"employee_78\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"83e030da-1db9-40f8-a5b8-a0a79c6e35c9\",\n                \"name\": \"Employee 79\",\n                \"username\": \"employee_79\",\n                \"base_salary\": 7500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"f64c8b7c-ee69-4ee2-a85c-2dc5f6bac871\",\n                \"name\": \"Employee 8\",\n                \"username\": \"employee_8\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"ba6d884e-5ba1-42c7-a21c-7e14e5246d43\",\n                \"name\": \"Employee 80\",\n                \"username\": \"employee_80\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"c1ed8824-9e72-462b-902d-6f35362544c1\",\n                \"name\": \"Employee 81\",\n                \"username\": \"employee_81\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"9b80d88f-6af3-4e96-80b9-4374ea8c2829\",\n                \"name\": \"Employee 82\",\n                \"username\": \"employee_82\",\n                \"base_salary\": 7500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"1bbeac7b-fae6-47d2-9914-cdb325dcdbff\",\n                \"name\": \"Employee 83\",\n                \"username\": \"employee_83\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"f5c5a59f-f747-4308-b8cf-f647e8970945\",\n                \"name\": \"Employee 84\",\n                \"username\": \"employee_84\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"5696c0d3-d538-4932-8a0f-faa2ce97a265\",\n                \"name\": \"Employee 85\",\n                \"username\": \"employee_85\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"e687975b-5a54-4620-ad1f-7dc479b35b1e\",\n                \"name\": \"Employee 86\",\n                \"username\": \"employee_86\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"1592cd03-3e3f-4dd2-9661-864de9c94a06\",\n                \"name\": \"Employee 87\",\n                \"username\": \"employee_87\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"093c3980-d2be-43a6-ae3b-c3a6b2a68476\",\n                \"name\": \"Employee 88\",\n                \"username\": \"employee_88\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"b1f1fd81-3df5-4568-adca-0346ab7ab060\",\n                \"name\": \"Employee 89\",\n                \"username\": \"employee_89\",\n                \"base_salary\": 8000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"0ea35a9f-8e55-420e-9969-ce48e0c5c992\",\n                \"name\": \"Employee 9\",\n                \"username\": \"employee_9\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"ed326352-6cc3-47ab-b223-0c3a76868fe3\",\n                \"name\": \"Employee 90\",\n                \"username\": \"employee_90\",\n                \"base_salary\": 6000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"b5168c04-c894-4fbd-9aa9-3ec51213bd7c\",\n                \"name\": \"Employee 91\",\n                \"username\": \"employee_91\",\n                \"base_salary\": 9000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"254567c9-18c3-4dfc-98c6-a16ca2b83e93\",\n                \"name\": \"Employee 92\",\n                \"username\": \"employee_92\",\n                \"base_salary\": 8000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"1ede1285-765b-4504-b643-5ef164c440f2\",\n                \"name\": \"Employee 93\",\n                \"username\": \"employee_93\",\n                \"base_salary\": 7000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"3be6a78e-68ef-404c-9949-fedf3a99ac67\",\n                \"name\": \"Employee 94\",\n                \"username\": \"employee_94\",\n                \"base_salary\": 8500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"36b66a81-bf70-42ad-827a-f706bdd6e587\",\n                \"name\": \"Employee 95\",\n                \"username\": \"employee_95\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"410cbd9c-83c7-4133-a81f-63d8d65a9a2e\",\n                \"name\": \"Employee 96\",\n                \"username\": \"employee_96\",\n                \"base_salary\": 5000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"60131880-3d78-44c7-a60f-2534cc6a74f4\",\n                \"name\": \"Employee 97\",\n                \"username\": \"employee_97\",\n                \"base_salary\": 8000000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"b2146d08-0c63-4d2d-9a7c-7009d3ea99be\",\n                \"name\": \"Employee 98\",\n                \"username\": \"employee_98\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            },\n            {\n                \"employee_id\": \"6a091acc-7fb5-4c83-bc49-3fb5f72938e4\",\n                \"name\": \"Employee 99\",\n                \"username\": \"employee_99\",\n                \"base_salary\": 5500000,\n                \"attendance\": {\n                    \"working_days\": 21,\n                    \"attended_days\": 0,\n                    \"attendance_rate\": \"0.00%\",\n                    \"amount\": 0\n                },\n                \"overtime\": {\n                    \"hours\": \"0.00\",\n                    \"amount\": 0\n                },\n                \"reimbursement\": {\n                    \"amount\": 0\n                },\n                \"take_home_pay\": 0\n            }\n        ]\n    },\n    \"code\": 200\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Attendance",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzlkZTUyMzItMzMyNC00YmEzLThhYzAtYzkyOGJlNTczZjFmIiwiaWF0IjoxNzQ5NDM4MTA4LCJleHAiOjE3NTAwNDI5MDgsIm5iZiI6MTc0OTQzODEwOH0.2myJCO-dIc1rLX0c8NomNZKZD6giOhYSA5cQo2hPrFoz51lNH3Nro-4cPSqgwuS-s0uySCxyMjs_7NQAHyJ6aQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attendance_date\": \"01-07-2025\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/attendance/v1/submit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"attendance",
+								"v1",
+								"submit"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"attendance_date\": \"01-07-2025\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/attendance/v1/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"attendance",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 12:58:47 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "100"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"success create new attendance\",\n    \"data\": \"18af7331-cdac-41d8-a5e9-1cd5e1a2ef85\",\n    \"code\": 201\n}"
+						},
+						{
+							"name": "422 - Error Payroll Period",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"attendance_date\": \"06-06-2025\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/attendance/v1/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"attendance",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 12:57:30 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "467"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Attendance date is not within an open payroll period\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: Attendance date is not within an open payroll period\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/attendance/create.ts:57:15)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Overtime",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJhN2ZlNWQtY2FmZC00MjNlLTlkYWItNGFjZWY1ZTQxZjEzIiwiaWF0IjoxNzQ5Mzk1ODYyLCJleHAiOjE3NTAwMDA2NjIsIm5iZiI6MTc0OTM5NTg2Mn0.ckrX4yVDRK7hpmRTpu955n2SpBHNS6DPxb0t6wmuMkYKrB7yC4YVHRiZatYoHayNXlwgSK8ymRoQylnsaH9rWw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"overtime_date\": \"08-06-2025\",\n    \"hours\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/overtime/v1/submit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"overtime",
+								"v1",
+								"submit"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"overtime_date\": \"08-06-2025\",\n    \"hours\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/overtime/v1/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"overtime",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 13:05:22 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "98"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"success create new overtime\",\n    \"data\": \"ccc06b17-6f9d-4525-a9ff-babb2277da85\",\n    \"code\": 201\n}"
+						},
+						{
+							"name": "422 - Error Payroll Period",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"overtime_date\": \"07-06-2025\",\n    \"hours\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/overtime/v1/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"overtime",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 05:21:33 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "461"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Overtime date is not within an open payroll period\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: Overtime date is not within an open payroll period\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/overtime/create.ts:69:15)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						},
+						{
+							"name": "422 - Error Attendance",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"overtime_date\": \"01-07-2025\",\n    \"hours\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/overtime/v1/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"overtime",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 12:59:43 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "467"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You must submit attendance before submitting overtime\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: You must submit attendance before submitting overtime\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/overtime/create.ts:58:17)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						},
+						{
+							"name": "422 - Limit Overtima Per Day",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"overtime_date\": \"07-06-2025\",\n    \"hours\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/overtime/v1/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"overtime",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 13:04:43 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "473"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You cannot submit more than 3 hours of overtime in a day\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: You cannot submit more than 3 hours of overtime in a day\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/overtime/create.ts:80:15)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Reimbursements",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJhN2ZlNWQtY2FmZC00MjNlLTlkYWItNGFjZWY1ZTQxZjEzIiwiaWF0IjoxNzQ5Mzk1ODYyLCJleHAiOjE3NTAwMDA2NjIsIm5iZiI6MTc0OTM5NTg2Mn0.ckrX4yVDRK7hpmRTpu955n2SpBHNS6DPxb0t6wmuMkYKrB7yC4YVHRiZatYoHayNXlwgSK8ymRoQylnsaH9rWw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reimbursement_date\": \"07-06-2025\",\n    \"amount\": 200000,\n    \"description\": \"reimbursement 2 - uang transportasi perjalanan dinas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/reimbursement/v1/submit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"reimbursement",
+								"v1",
+								"submit"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reimbursement_date\": \"07-06-2025\",\n    \"amount\": 200000,\n    \"description\": \"reimbursement 2 - uang transportasi perjalanan dinas\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/reimbursement/v1/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"reimbursement",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 13:05:28 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "103"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"success create new reimbursement\",\n    \"data\": \"a2399720-927e-4f3f-bde8-d8683a445506\",\n    \"code\": 201\n}"
+						},
+						{
+							"name": "422 - Error Payroll Period",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reimbursement_date\": \"07-06-2025\",\n    \"amount\": 200000,\n    \"description\": \"reimbursement 2 - uang transportasi perjalanan dinas\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/reimbursement/v1/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"reimbursement",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 05:21:41 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "476"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Reimbursement date is not within an open payroll period\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: Reimbursement date is not within an open payroll period\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/reimbursement/create.ts:68:15)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						},
+						{
+							"name": "422 - Error Attendance",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"reimbursement_date\": \"01-07-2025\",\n    \"amount\": 200000,\n    \"description\": \"reimbursement 2 - uang transportasi perjalanan dinas\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/reimbursement/v1/submit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"reimbursement",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 09 Jun 2025 13:00:14 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "482"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You must submit attendance before submitting reimbursement\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: You must submit attendance before submitting reimbursement\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/reimbursement/create.ts:57:17)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
