@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["node"],
+    "types": ["node", "bun-types"],
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "es2017",

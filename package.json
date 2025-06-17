@@ -12,7 +12,9 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "migrate": "bun src/migrate.ts",
     "start": "bun src/index.ts",
-    "dev": "bun --watch src/index.ts"
+    "dev": "bun --watch src/index.ts",
+    "test": "bun test",
+    "test:coverage": "bun test --coverage"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
@@ -21,7 +23,6 @@
     "@types/morgan": "^1.9.9",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",
-    "c8": "^10.1.3",
     "codecov": "^3.8.3",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
@@ -44,35 +45,6 @@
     "pg": "^8.16.0",
     "winston": "^3.17.0",
     "zod": "^3.25.55"
-  },
-  "c8": {
-    "extension": [
-      ".ts"
-    ],
-    "include": [
-      "src/**/*.ts"
-    ],
-    "exclude": [
-      "**/*.d.ts",
-      "coverage/**",
-      "test/**",
-      "dist/**",
-      "**/*.spec.ts",
-      "**/*.test.ts",
-      "**/node_modules/**"
-    ],
-    "reporter": [
-      "html",
-      "text",
-      "lcov"
-    ],
-    "all": true,
-    "check-coverage": true,
-    "branches": 80,
-    "lines": 80,
-    "functions": 80,
-    "statements": 80,
-    "reportsDirectory": "./coverage"
   },
   "engines": {
     "bun": ">=1.0.0",
