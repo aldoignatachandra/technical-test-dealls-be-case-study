@@ -15,10 +15,7 @@ const table = escapeIdentifier(tableName.PAYROLL_PERIODS);
 const tableAttendance = escapeIdentifier(tableName.ATTENDANCE);
 const db = new Pool(pgConnection);
 
-export const StoreBuilder = async (
-  body: CreatePayrollPeriod,
-  user: UserRes
-): Promise<string> => {
+export const StoreBuilder = async (body: CreatePayrollPeriod, user: UserRes): Promise<string> => {
   const queryStore = {
     text: `
         INSERT INTO ${table} (start_date, end_date, status, created_by, updated_by) 
@@ -68,9 +65,7 @@ export const SearchPayrollPeriodBuilder = async (
   };
 };
 
-export const ShowBuilder = async (
-  params: IdParam
-): Promise<PayrollPeriodData> => {
+export const ShowBuilder = async (params: IdParam): Promise<PayrollPeriodData> => {
   const queryShow = {
     text: `SELECT * FROM ${table} WHERE id = $1`,
     values: [params.id],
@@ -79,10 +74,7 @@ export const ShowBuilder = async (
   return (await db.query(queryShow)).rows[0];
 };
 
-export const CheckOverlappingPeriods = async (
-  startDate: Date,
-  endDate: Date
-): Promise<boolean> => {
+export const CheckOverlappingPeriods = async (startDate: Date, endDate: Date): Promise<boolean> => {
   const queryCount = {
     text: `
       SELECT COUNT(*) as count 

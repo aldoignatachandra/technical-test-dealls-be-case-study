@@ -13,8 +13,6 @@ export type ReimbursementData = {
   updated_at: Date;
 };
 
-export type CreateReimbursement = z.infer<
-  typeof CreateReimbursementValidation
-> & {
+export type CreateReimbursement = z.infer<typeof CreateReimbursementValidation> & {
   payroll_period_id?: string;
 };

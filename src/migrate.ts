@@ -12,10 +12,7 @@ const checkAndCreateDatabase = async () => {
   await tempClient.connect();
 
   const dbName = pgConnection.database;
-  const res = await tempClient.query(
-    `SELECT 1 FROM pg_database WHERE datname = $1`,
-    [dbName]
-  );
+  const res = await tempClient.query(`SELECT 1 FROM pg_database WHERE datname = $1`, [dbName]);
 
   if (res.rowCount === 0) {
     console.log(`\x1b[33mDatabase "${dbName}" does not exist. Creating...`);
@@ -32,10 +29,10 @@ const client = new Client(pgConnection);
 
 // Execute migrations for regular tables
 const runMigrations = async () => {
-  // Exclude the seeder from the regular migration loop
-  const migrations = readdirSync("src/migrations").filter(
-    (file) => !file.includes("employees_seeder.sql")
-  );
+  // Exclude the seeder from the regular migration loop and sort alphabetically
+  const migrations = readdirSync("src/migrations")
+    .filter((file) => !file.includes("employees_seeder.sql"))
+    .sort();
 
   console.log(`\x1b[32m=============================`);
   console.log(`\x1b[32mStarting Migration`);
@@ -65,7 +62,7 @@ const runSeeders = async () => {
   await client.query(readFileSync(seederPath, "utf-8"));
 
   console.log(`\x1b[32mSeeder Executed: employees_seeder.sql`);
-  
+
   console.log(`\x1b[32m=============================`);
   console.log(`\x1b[32mSeeder Finished`);
   console.log(`\x1b[32m=============================`);

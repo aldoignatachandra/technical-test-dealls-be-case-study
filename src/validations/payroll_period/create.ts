@@ -11,10 +11,7 @@ const parseDDMMYYYY = (dateString: string): DateTime => {
   const [day, month, year] = dateString.split("-").map(Number);
 
   // Create a Luxon DateTime object
-  const date = DateTime.fromObject(
-    { day, month, year },
-    { zone: "Asia/Jakarta" }
-  );
+  const date = DateTime.fromObject({ day, month, year }, { zone: "Asia/Jakarta" });
 
   // Check if the date is valid
   if (!date.isValid) {

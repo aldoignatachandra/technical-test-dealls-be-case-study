@@ -11,7 +11,7 @@ export const LoginPipe = async (body: HonoRequest): Promise<AuthLogin> => {
   const validate = await LoginValidation.safeParseAsync(validationBody);
   if (!validate.success) {
     const error: any = "error" in validate ? validate.error.format() : null;
-    
+
     let errorMessage = "Validation error";
 
     // Check if there are custom errors in the username or password fields

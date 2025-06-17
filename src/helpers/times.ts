@@ -18,9 +18,7 @@ export const isoDate = (date: Date | string): any => {
 };
 
 export const iso = (date: Date | string): string => {
-  return toDateTime(date)
-    .setZone("Asia/Jakarta")
-    .toFormat("yyyy-LL-dd HH:mm:ss");
+  return toDateTime(date).setZone("Asia/Jakarta").toFormat("yyyy-LL-dd HH:mm:ss");
 };
 
 export const isoUtc = (date: Date | string): string => {
@@ -47,9 +45,7 @@ export const getWorkingDays = (startDate: string, endDate: string): number => {
       : DateTime.fromJSDate(endDate);
 
   if (!start.isValid || !end.isValid) {
-    throw new Error(
-      "Invalid date format. Use 'dd-MM-yyyy' for strings or pass a Date object."
-    );
+    throw new Error("Invalid date format. Use 'dd-MM-yyyy' for strings or pass a Date object.");
   }
 
   if (end < start) {

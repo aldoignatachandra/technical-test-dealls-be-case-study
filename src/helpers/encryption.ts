@@ -4,10 +4,7 @@ import { currDate } from "./times";
 
 const secret = process.env.SECRET_KEY || "";
 
-export const JwtGenerator = async (
-  data: object,
-  exp: number | null = null
-): Promise<TokenRes> => {
+export const JwtGenerator = async (data: object, exp: number | null = null): Promise<TokenRes> => {
   const date = currDate();
 
   const payload = {

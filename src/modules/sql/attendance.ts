@@ -8,10 +8,7 @@ import { currDate } from "../../helpers/times";
 const table = escapeIdentifier(tableName.ATTENDANCE);
 const db = new Pool(pgConnection);
 
-export const StoreBuilder = async (
-  body: CreateAttendance,
-  user: UserRes
-): Promise<string> => {
+export const StoreBuilder = async (body: CreateAttendance, user: UserRes): Promise<string> => {
   const queryStore = {
     text: `
         INSERT INTO ${table} (employee_id, attendance_date, submitted_at, payroll_period_id) 

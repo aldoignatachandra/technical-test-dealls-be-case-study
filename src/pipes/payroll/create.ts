@@ -3,10 +3,7 @@ import { HTTPException } from "hono/http-exception";
 import { CreatePayroll, UserRes } from "../../types";
 import { CreatePayrollValidation } from "../../validations/payroll";
 import { role } from "../../helpers/constant";
-import {
-  CheckTotalAttendanceInPayrollPeriod,
-  ShowBuilder,
-} from "../../modules/sql/payroll_period";
+import { CheckTotalAttendanceInPayrollPeriod, ShowBuilder } from "../../modules/sql/payroll_period";
 import { CheckGeneratedPayroll } from "../../modules/sql/payroll";
 
 export const CreatePayrollPipe = async (

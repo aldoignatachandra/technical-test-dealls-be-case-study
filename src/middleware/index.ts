@@ -9,7 +9,7 @@ const app = new Hono<{ Variables: UserMiddleware }>();
 const origin = process.env.ORIGINS ? process.env.ORIGINS.split(",") : [""];
 const corsOpt = { origin };
 
-// cors for all path
+// CORS for all path
 app.use("*", cors(corsOpt));
 
 // Basic auth specifically for login path
@@ -20,8 +20,7 @@ app.use("/auth/v1/login", async (c, next) => {
     return c.json(
       {
         success: false,
-        message:
-          "Authentication required. Please provide Basic Auth credentials.",
+        message: "Authentication required. Please provide Basic Auth credentials.",
         status: 401,
       },
       401

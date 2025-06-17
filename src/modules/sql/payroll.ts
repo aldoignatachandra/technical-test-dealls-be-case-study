@@ -164,9 +164,7 @@ export const StoreBuilder = async (
 };
 
 // Check if payroll period already has generated payslips
-export const CheckGeneratedPayroll = async (body: {
-  id: string;
-}): Promise<boolean> => {
+export const CheckGeneratedPayroll = async (body: { id: string }): Promise<boolean> => {
   const query = {
     text: `SELECT COUNT(*) as count FROM ${tablePayslip} WHERE payroll_period_id = $1`,
     values: [body.id],
@@ -177,9 +175,7 @@ export const CheckGeneratedPayroll = async (body: {
 };
 
 // Show Minimal Employee Payslips Data
-export const ShowBuilder = async (
-  body: CheckEmployeePayslip
-): Promise<PayrollData> => {
+export const ShowBuilder = async (body: CheckEmployeePayslip): Promise<PayrollData> => {
   const query = {
     text: `SELECT * FROM ${tablePayslip} WHERE payroll_period_id = $1 AND employee_id = $2 LIMIT 1`,
     values: [body.payroll_period_id, body.employee_id],
@@ -217,9 +213,7 @@ export const ShowDetailPayslipsByPeriodBuilder = async (
     values: [user.id, period.id],
   };
   const attendanceResult = await db.query(attendanceQuery);
-  const attendanceDates = attendanceResult.rows.map((row) =>
-    isoDate(row.attendance_date)
-  );
+  const attendanceDates = attendanceResult.rows.map((row) => isoDate(row.attendance_date));
   const attendanceCount = attendanceResult.rowCount;
 
   // Calculate workdays in the period (excluding weekends)
@@ -293,9 +287,7 @@ export const ShowDetailPayslipsByPeriodBuilder = async (
   );
 
   const totalTakeHomePay =
-    Number(attendanceAmount) +
-    Number(overtimeAmount) +
-    Number(reimbursementAmount);
+    Number(attendanceAmount) + Number(overtimeAmount) + Number(reimbursementAmount);
 
   // Check if payslip already exists for this period
   let payslipId = null;
@@ -331,9 +323,7 @@ export const ShowDetailPayslipsByPeriodBuilder = async (
     attendance: {
       working_days: workdaysCount,
       attended_days: attendanceCount,
-      attendance_rate: Number(
-        ((attendanceCount / workdaysCount) * 100).toFixed(2)
-      ),
+      attendance_rate: Number(((attendanceCount / workdaysCount) * 100).toFixed(2)),
       dates: attendanceDates,
       amount: Math.round(attendanceAmount),
     },
@@ -430,15 +420,11 @@ export const EmployeeSummaryByPeriodBuilder = async (
     };
 
     const reimbursementResult = await db.query(reimbursementQuery);
-    const reimbursementAmount = parseFloat(
-      reimbursementResult.rows[0].total_amount || "0"
-    );
+    const reimbursementAmount = parseFloat(reimbursementResult.rows[0].total_amount || "0");
 
     // Calculate take-home pay
     const takeHomePay =
-      Number(attendanceAmount) +
-      Number(overtimeAmount) +
-      Number(reimbursementAmount);
+      Number(attendanceAmount) + Number(overtimeAmount) + Number(reimbursementAmount);
 
     // Add to summary
     employeePayslips.push({
@@ -449,8 +435,7 @@ export const EmployeeSummaryByPeriodBuilder = async (
       attendance: {
         working_days: workdaysCount,
         attended_days: attendanceCount,
-        attendance_rate:
-          ((attendanceCount / workdaysCount) * 100).toFixed(2) + "%",
+        attendance_rate: ((attendanceCount / workdaysCount) * 100).toFixed(2) + "%",
         amount: Math.round(attendanceAmount),
       },
       overtime: {

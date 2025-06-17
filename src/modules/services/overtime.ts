@@ -5,10 +5,7 @@ import { createAuditLog } from "./audit_log";
 import { actionType, tableName, moduleName } from "../../helpers/constant";
 import { CreateOvertime } from "../../types/overtime";
 
-export const createOvertime = async (
-  body: CreateOvertime,
-  user: UserRes
-): Promise<string> => {
+export const createOvertime = async (body: CreateOvertime, user: UserRes): Promise<string> => {
   const data = await StoreBuilder(body, user);
   const bodyExt = body as CreateOvertime & {
     ip_address?: string;

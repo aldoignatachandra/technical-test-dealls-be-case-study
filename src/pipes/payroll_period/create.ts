@@ -13,8 +13,7 @@ export const CreatePayrollPeriodPipe = async (
   const { ip_address, user_agent, ...validationBody } = body as any;
   const requestMetadata = { ip_address, user_agent };
 
-  const validate =
-    await CreatePayrollPeriodValidation.safeParseAsync(validationBody);
+  const validate = await CreatePayrollPeriodValidation.safeParseAsync(validationBody);
   if (!validate.success) {
     const error: any = "error" in validate ? validate.error.format() : null;
 

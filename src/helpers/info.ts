@@ -20,9 +20,7 @@ export const getRequestInfo = (c: Context): RequestInfo => {
 
   // Get user agent with fallback
   const userAgent =
-    c.req.header("user-agent") ||
-    c.req.raw?.headers?.get?.("user-agent") ||
-    "Unknown Client";
+    c.req.header("user-agent") || c.req.raw?.headers?.get?.("user-agent") || "Unknown Client";
 
   return {
     ip_address: ip,

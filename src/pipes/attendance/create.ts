@@ -14,8 +14,7 @@ export const CreateAttendancePipe = async (
   const { ip_address, user_agent, ...validationBody } = body as any;
   const requestMetadata = { ip_address, user_agent };
 
-  const validate =
-    await CreateAttendanceValidation.safeParseAsync(validationBody);
+  const validate = await CreateAttendanceValidation.safeParseAsync(validationBody);
   if (!validate.success) {
     const error: any = "error" in validate ? validate.error.format() : null;
 
@@ -50,9 +49,7 @@ export const CreateAttendancePipe = async (
   }
 
   // Check if attendance_date is in between available 'open' payroll period or not
-  const payrollPeriod: any = await CheckAvailablePayrollPeriodByDate(
-    validate.data.attendance_date
-  );
+  const payrollPeriod: any = await CheckAvailablePayrollPeriodByDate(validate.data.attendance_date);
   if (!payrollPeriod) {
     throw new HTTPException(422, {
       message: "Attendance date is not within an open payroll period",

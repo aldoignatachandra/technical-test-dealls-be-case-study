@@ -5,10 +5,7 @@ import { createAuditLog } from "./audit_log";
 import { actionType, tableName, moduleName } from "../../helpers/constant";
 import { CreateAttendance } from "../../types/attendance";
 
-export const createAttendance = async (
-  body: CreateAttendance,
-  user: UserRes
-): Promise<string> => {
+export const createAttendance = async (body: CreateAttendance, user: UserRes): Promise<string> => {
   const data = await StoreBuilder(body, user);
   const bodyExt = body as CreateAttendance & {
     ip_address?: string;

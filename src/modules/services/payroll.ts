@@ -55,9 +55,7 @@ export const createPayroll = async (
 };
 
 // Show Minimal Employee Payslips Data
-export const show = async (
-  body: CheckEmployeePayslip
-): Promise<PayrollData> => {
+export const show = async (body: CheckEmployeePayslip): Promise<PayrollData> => {
   return await ShowBuilder(body);
 };
 

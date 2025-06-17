@@ -37,10 +37,7 @@ export const ShowByIdBuilder = async (id: string): Promise<UserRes> => {
   return (await db.query(queryShow)).rows[0];
 };
 
-export const UpdateTokenBuilder = async (
-  id: string,
-  token: string
-): Promise<void> => {
+export const UpdateTokenBuilder = async (id: string, token: string): Promise<void> => {
   const queryUpdate = {
     text: `UPDATE ${table} SET token = $1, updated_by = $2 WHERE id = $3`,
     values: [token, id, id],

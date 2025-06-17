@@ -6,17 +6,9 @@ export const SearchValidation = z
   .object({
     limit: numString.min(1).transform((val) => parseInt(val)),
     page: numString.min(1).transform((val) => parseInt(val)),
-    sort_by: z.union([
-      z.literal("").transform(() => null),
-      sortByString.min(1),
-    ]),
-    sort_type: z.union([
-      z.literal("").transform(() => null),
-      z.enum(["asc", "desc"]),
-    ]),
-    status: z
-      .union([z.literal("").transform(() => null), z.enum(statusPayrollPeriod)])
-      .optional(),
+    sort_by: z.union([z.literal("").transform(() => null), sortByString.min(1)]),
+    sort_type: z.union([z.literal("").transform(() => null), z.enum(["asc", "desc"])]),
+    status: z.union([z.literal("").transform(() => null), z.enum(statusPayrollPeriod)]).optional(),
   })
   .strict()
   .refine((schema) => (schema.sort_by && !schema.sort_type ? false : true), {

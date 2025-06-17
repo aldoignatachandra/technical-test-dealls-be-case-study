@@ -7,11 +7,7 @@ import {
   PayrollPeriodSearch,
   UserRes,
 } from "../../types";
-import {
-  SearchPayrollPeriodBuilder,
-  ShowBuilder,
-  StoreBuilder,
-} from "../sql/payroll_period";
+import { SearchPayrollPeriodBuilder, ShowBuilder, StoreBuilder } from "../sql/payroll_period";
 import { createAuditLog } from "./audit_log";
 import { actionType, tableName, moduleName } from "../../helpers/constant";
 import { PaginationBuilder } from "../../helpers/pagination";

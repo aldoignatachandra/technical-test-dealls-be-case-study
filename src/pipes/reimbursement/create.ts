@@ -15,8 +15,7 @@ export const CreateReimbursementPipe = async (
   const { ip_address, user_agent, ...validationBody } = body as any;
   const requestMetadata = { ip_address, user_agent };
 
-  const validate =
-    await CreateReimbursementValidation.safeParseAsync(validationBody);
+  const validate = await CreateReimbursementValidation.safeParseAsync(validationBody);
   if (!validate.success) {
     const error: any = "error" in validate ? validate.error.format() : null;
 
@@ -49,10 +48,7 @@ export const CreateReimbursementPipe = async (
   const dateTime = DateTime.fromISO(validate.data.reimbursement_date);
   const dayOfWeek = dateTime.weekday;
   if (dayOfWeek !== 6 && dayOfWeek !== 7) {
-    const checkAttendance = await CheckAttendanceByDate(
-      validate.data.reimbursement_date,
-      user
-    );
+    const checkAttendance = await CheckAttendanceByDate(validate.data.reimbursement_date, user);
     if (!checkAttendance) {
       throw new HTTPException(422, {
         message: "You must submit attendance before submitting reimbursement",

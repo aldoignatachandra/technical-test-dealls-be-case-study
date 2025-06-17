@@ -16,8 +16,7 @@ export const CreateOvertimePipe = async (
   const { ip_address, user_agent, ...validationBody } = body as any;
   const requestMetadata = { ip_address, user_agent };
 
-  const validate =
-    await CreateOvertimeValidation.safeParseAsync(validationBody);
+  const validate = await CreateOvertimeValidation.safeParseAsync(validationBody);
   if (!validate.success) {
     const error: any = "error" in validate ? validate.error.format() : null;
 
@@ -50,10 +49,7 @@ export const CreateOvertimePipe = async (
   const dateTime = DateTime.fromISO(validate.data.overtime_date);
   const dayOfWeek = dateTime.weekday;
   if (dayOfWeek !== 6 && dayOfWeek !== 7) {
-    const checkAttendance = await CheckAttendanceByDate(
-      validate.data.overtime_date,
-      user
-    );
+    const checkAttendance = await CheckAttendanceByDate(validate.data.overtime_date, user);
     if (!checkAttendance) {
       throw new HTTPException(422, {
         message: "You must submit attendance before submitting overtime",
@@ -62,9 +58,7 @@ export const CreateOvertimePipe = async (
   }
 
   // Check if overtime_date is in between available 'open' payroll period or not
-  const payrollPeriod: any = await CheckAvailablePayrollPeriodByDate(
-    validate.data.overtime_date
-  );
+  const payrollPeriod: any = await CheckAvailablePayrollPeriodByDate(validate.data.overtime_date);
   if (!payrollPeriod) {
     throw new HTTPException(422, {
       message: "Overtime date is not within an open payroll period",
@@ -72,10 +66,7 @@ export const CreateOvertimePipe = async (
   }
 
   // Check if the overtime cant input accumulation 3 hours in a day
-  const checkOvertime = await CountOvertimeByDate(
-    validate.data.overtime_date,
-    user
-  );
+  const checkOvertime = await CountOvertimeByDate(validate.data.overtime_date, user);
   if (checkOvertime + validate.data.hours > 3) {
     throw new HTTPException(422, {
       message: "You cannot submit more than 3 hours of overtime in a day",

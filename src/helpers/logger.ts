@@ -48,32 +48,17 @@ const log = (context: string, message: string, scope: string): void => {
   logger.info(obj);
 };
 
-const info = (
-  context: string,
-  message: string,
-  scope: string,
-  meta?: LogMeta
-): void => {
+const info = (context: string, message: string, scope: string, meta?: LogMeta): void => {
   const obj = { context, scope, message, meta };
   logger.info(obj);
 };
 
-const warn = (
-  context: string,
-  message: string,
-  scope: string,
-  meta?: LogMeta
-): void => {
+const warn = (context: string, message: string, scope: string, meta?: LogMeta): void => {
   const obj = { context, scope, message, meta };
   logger.warn(obj);
 };
 
-const error = (
-  context: string,
-  message: string,
-  scope: string,
-  meta?: LogMeta
-): void => {
+const error = (context: string, message: string, scope: string, meta?: LogMeta): void => {
   const obj = { context, scope, message, meta };
   logger.error(obj);
 };

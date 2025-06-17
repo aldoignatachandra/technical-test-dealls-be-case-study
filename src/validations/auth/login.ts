@@ -22,10 +22,7 @@ export const LoginValidation = z
       return z.NEVER;
     }
 
-    const checkPassword = await bcrypt.compareSync(
-      schema.password,
-      user.password
-    );
+    const checkPassword = await bcrypt.compareSync(schema.password, user.password);
 
     if (!checkPassword) {
       ctx.addIssue({

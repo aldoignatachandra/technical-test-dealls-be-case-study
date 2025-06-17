@@ -13,17 +13,13 @@ export const processPayroll = async (
   return { message: "success generate payroll", data, code: 201 };
 };
 
-export const showDetailPayslips = async (
-  c: Context
-): Promise<GeneralResponse> => {
+export const showDetailPayslips = async (c: Context): Promise<GeneralResponse> => {
   const validation = await CheckerPipe(c);
   const data = await service.showDetailPayslips(validation, c.get("user"));
   return { message: null, data, code: 200 };
 };
 
-export const getPayrollSummary = async (
-  c: Context
-): Promise<GeneralResponse> => {
+export const getPayrollSummary = async (c: Context): Promise<GeneralResponse> => {
   const validation = await SummaryPipe(c);
   const data = await service.SummaryPayslipsByPeriod(validation, c.get("user"));
   return { message: null, data, code: 200 };

@@ -4,10 +4,7 @@ import { LogoutValidation } from "../../validations/auth";
 import { AuthLogout } from "../../types";
 import { ShowByIdBuilder } from "../../modules/sql/auth";
 
-export const LogoutPipe = async (
-  body: HonoRequest,
-  c: Context
-): Promise<AuthLogout> => {
+export const LogoutPipe = async (body: HonoRequest, c: Context): Promise<AuthLogout> => {
   // Extract fields that should not be validated by Zod
   const { ip_address, user_agent, ...validationBody } = body as any;
   const requestMetadata = { ip_address, user_agent };

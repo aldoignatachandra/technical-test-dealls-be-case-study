@@ -4,9 +4,7 @@ import { UserRes } from "../types";
 import { ContentfulStatusCode } from "hono/utils/http-status";
 import { ShowByIdBuilder } from "../modules/sql/auth";
 
-export const tokenMiddleware = async (
-  token: string | undefined
-): Promise<UserRes> => {
+export const tokenMiddleware = async (token: string | undefined): Promise<UserRes> => {
   try {
     const secret = process.env.SECRET_KEY || "";
 

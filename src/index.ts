@@ -18,11 +18,7 @@ app.basePath("/api").route("/", Middleware).route("/", Route);
 app.onError((err, c) => Exception(err, c));
 
 // Logger Server Start
-info(
-  ctx,
-  `server started, listening at port ( ${port} )`,
-  "initate application"
-);
+info(ctx, `server started, listening at port ( ${port} )`, "initate application");
 
 export default {
   fetch: app.fetch,

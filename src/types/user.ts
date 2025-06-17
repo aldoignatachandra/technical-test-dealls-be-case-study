@@ -12,7 +12,4 @@ export type UserModel = {
   updated_by: string;
 };
 
-export type UserRes = Omit<
-  UserModel,
-  "password" | "salary" | "created_by" | "updated_by"
->;
+export type UserRes = Omit<UserModel, "password" | "salary" | "created_by" | "updated_by">;
