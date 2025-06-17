@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["node", "mocha"],
+    "types": ["node"],
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "es2017",

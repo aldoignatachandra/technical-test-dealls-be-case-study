@@ -10,4 +10,12 @@ attendance.post("/submit", async (c) => {
   return c.json(await controller.createAttendance(body, c.get("user")), 201);
 });
 
+attendance.get("/:attendance_id", async (c) => {
+  return c.json(await controller.showAttendance(c));
+});
+
+attendance.get("/", async (c) => {
+  return c.json(await controller.indexAttendance(c));
+});
+
 export const attendanceRoute = attendance;

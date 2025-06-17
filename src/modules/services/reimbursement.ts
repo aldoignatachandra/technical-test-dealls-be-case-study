@@ -1,9 +1,14 @@
 import { log } from "../../helpers/logger";
-import { UserRes } from "../../types";
-import { StoreBuilder } from "../sql/reimbursement";
+import { IdParam, PaginationResponse, UserRes } from "../../types";
+import { SearchReimbursementBuilder, ShowBuilder, StoreBuilder } from "../sql/reimbursement";
 import { createAuditLog } from "./audit_log";
 import { actionType, tableName, moduleName } from "../../helpers/constant";
-import { CreateReimbursement } from "../../types/reimbursement";
+import {
+  CreateReimbursement,
+  ReimbursementData,
+  ReimbursementSearch,
+} from "../../types/reimbursement";
+import { PaginationBuilder } from "../../helpers/pagination";
 
 export const createReimbursement = async (
   body: CreateReimbursement,
@@ -32,4 +37,16 @@ export const createReimbursement = async (
   log(ctx, logMsg, `${user.name}`);
 
   return data;
+};
+
+export const indexReimbursement = async (
+  params: ReimbursementSearch
+): Promise<PaginationResponse> => {
+  const { data, total, total_row } = await SearchReimbursementBuilder(params);
+  const paginationMeta = PaginationBuilder(params, total, total_row);
+  return { data, ...paginationMeta };
+};
+
+export const show = async (params: IdParam): Promise<ReimbursementData> => {
+  return await ShowBuilder(params);
 };

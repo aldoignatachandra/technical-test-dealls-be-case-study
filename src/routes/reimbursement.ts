@@ -10,4 +10,12 @@ reimbursement.post("/submit", async (c) => {
   return c.json(await controller.createReimbursement(body, c.get("user")), 201);
 });
 
+reimbursement.get("/:reimbursement_id", async (c) => {
+  return c.json(await controller.showReimbursement(c));
+});
+
+reimbursement.get("/", async (c) => {
+  return c.json(await controller.indexReimbursement(c));
+});
+
 export const reimbursementRoute = reimbursement;

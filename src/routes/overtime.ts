@@ -10,4 +10,12 @@ overtime.post("/submit", async (c) => {
   return c.json(await controller.createOvertime(body, c.get("user")), 201);
 });
 
+overtime.get("/:overtime_id", async (c) => {
+  return c.json(await controller.showOvertime(c));
+});
+
+overtime.get("/", async (c) => {
+  return c.json(await controller.indexOvertime(c));
+});
+
 export const overtimeRoute = overtime;

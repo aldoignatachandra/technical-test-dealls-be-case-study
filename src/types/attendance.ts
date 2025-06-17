@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { CreateAttendanceValidation } from "../validations/attendance";
+import { SearchValidation } from "../validations/attendance";
 
 export type AttendanceData = {
   id: string;
@@ -15,3 +16,5 @@ export type AttendanceData = {
 export type CreateAttendance = z.infer<typeof CreateAttendanceValidation> & {
   payroll_period_id?: string;
 };
+
+export type AttendanceSearch = z.infer<typeof SearchValidation>;

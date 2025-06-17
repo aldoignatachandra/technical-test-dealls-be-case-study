@@ -14,7 +14,7 @@ WITH alphabet_series AS (
 INSERT INTO public.employees (id, username, name, password, salary, role, created_by, updated_by)
 SELECT 
   gen_random_uuid(),
-  'employee_' || a.code, 
+  'employee_' || LOWER(a.code), 
   'Employee ' || a.code, 
   crypt('employee123', gen_salt('bf')), 
   (ARRAY[5000000, 5500000, 6000000, 6500000, 7000000, 7500000, 8000000, 8500000, 9000000])[floor(random() * 9 + 1)], 

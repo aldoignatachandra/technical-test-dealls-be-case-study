@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { CreateOvertimeValidation } from "../validations/overtime";
+import { SearchValidation } from "../validations/overtime";
 
 export type OvertimeData = {
   id: string;
@@ -15,3 +16,5 @@ export type OvertimeData = {
 export type CreateOvertime = z.infer<typeof CreateOvertimeValidation> & {
   payroll_period_id?: string;
 };
+
+export type OvertimeSearch = z.infer<typeof SearchValidation>;

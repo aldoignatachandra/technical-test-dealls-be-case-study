@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { CreateReimbursementValidation } from "../validations/reimbursement";
+import { SearchValidation } from "../validations/reimbursement";
 
 export type ReimbursementData = {
   id: string;
@@ -16,3 +17,5 @@ export type ReimbursementData = {
 export type CreateReimbursement = z.infer<typeof CreateReimbursementValidation> & {
   payroll_period_id?: string;
 };
+
+export type ReimbursementSearch = z.infer<typeof SearchValidation>;
