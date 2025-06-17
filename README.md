@@ -31,16 +31,16 @@ This is a take-home technical test backend project implementing a scalable backe
 
 ### 🧪 Testing & Quality
 
-- **Testing Framework**: Built with Bun's test runner
-- **Code Coverage**: Using C8 for detailed coverage reports
-- **Mocking**: Sinon for creating test doubles
-- **Assertions**: Chai for expressive test assertions
+- **Testing Framework**: Built with Bun's test runner (Jest-compatible)
+- **Code Coverage**: Using Bun's built-in coverage reporting
+- **Mocking**: Using Jest-compatible mocking via Bun's test API
+- **Assertions**: Jest-style assertions provided by Bun's test runner
 
 ## 🚀 Getting Started
 
 ```bash
 # Clone the repository
-git clone https://github.com/username/employee-management.git
+git clone https://github.com/aldoignatachandra/Bun-Simple-Payslip-Generation-System
 
 # Install dependencies
 bun install
@@ -83,8 +83,6 @@ bun run test
 # Run tests with coverage
 bun run test:coverage
 
-# View coverage report in browser
-bun run coverage:view
 ```
 
 ## 📦 Project Structure
@@ -127,7 +125,7 @@ This project demonstrates:
 
 ---
 
-**Notes:** Unit testing is still being need improved. The current implementation demonstrates the testing approach with Bun, Sinon, and Chai, but coverage could be further expanded in future iterations.
+**Notes:** Unit testing is still being improved. The current implementation demonstrates the testing approach with Bun's built-in test runner (Jest-compatible), but coverage could be further expanded in future iterations.
 
 ---
 
