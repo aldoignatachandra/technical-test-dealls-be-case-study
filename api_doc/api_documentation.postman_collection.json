@@ -11,6 +11,43 @@
 			"item": [
 				{
 					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test if the request was successful",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Parse the response JSON",
+									"var jsonData = pm.response.json();",
+									"",
+									"// Test if the response structure is as expected",
+									"pm.test(\"Response has correct structure\", function () {",
+									"    pm.expect(jsonData).to.have.property('message');",
+									"    pm.expect(jsonData).to.have.property('data');",
+									"    pm.expect(jsonData).to.have.property('code');",
+									"    pm.expect(jsonData.data).to.have.property('token');",
+									"    pm.expect(jsonData.data).to.have.property('refresh_token');",
+									"});",
+									"",
+									"// Store the token in environment variable",
+									"if (jsonData.data && jsonData.data.token) {",
+									"    pm.environment.set(\"token\", jsonData.data.token);",
+									"    console.log(\"Token saved to environment variable 'token'\");",
+									"    ",
+									"    // Optionally store the refresh token as well",
+									"    pm.environment.set(\"refresh_token\", jsonData.data.refresh_token);",
+									"    console.log(\"Refresh token saved to environment variable 'refresh_token'\");",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -31,7 +68,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin123\"\n}",
+							"raw": "{\n    \"username\": \"employee_aa\",\n    \"password\": \"employee123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,12 +76,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/auth/v1/login",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/auth/v1/login",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
 								"auth",
@@ -117,7 +152,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5NDczNDA1LCJleHAiOjE3NTAwNzgyMDUsIm5iZiI6MTc0OTQ3MzQwNX0.hW9OtBvR79_e0bgsIC2cjn9nltxlP3RYtxKoef-jWIqMO6z7rmYBPgJUjdHYtCBn7wW9R8vyIxqn4yp4MZkw7w",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -134,12 +169,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/auth/v1/logout",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/auth/v1/logout",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
 								"auth",
@@ -217,7 +250,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5Mzk1ODEwLCJleHAiOjE3NTAwMDA2MTAsIm5iZiI6MTc0OTM5NTgxMH0.AobL3F062eXjA8jmpCyeUTYQr_aE4VDqXgjT5Ij4Y9moeYoudV5hx9oLNsr_m9xkK7sM9UnZTzo94SilCjcqpA",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -226,7 +259,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"start_date\": \"01-07-2025\",\n    \"end_date\": \"31-07-2025\"\n}",
+							"raw": "{\n    \"start_date\": \"01-06-2025\",\n    \"end_date\": \"30-06-2025\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -234,12 +267,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/payroll-period/v1",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/payroll-period/v1",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
 								"payroll-period",
@@ -365,7 +396,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5NDUxNDgzLCJleHAiOjE3NTAwNTYyODMsIm5iZiI6MTc0OTQ1MTQ4M30.lXZAtyxG3_DN9Ll69g2C1l82e3oS90zyJ8jlmYdc1f_EUppv8ksnQ1Oaf8UvQhjRtBLZ5iou5ETjeQo73FwdYw",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -382,12 +413,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/payroll-period/v1/:payroll_period_id",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/payroll-period/v1/:payroll_period_id",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
 								"payroll-period",
@@ -397,7 +426,7 @@
 							"variable": [
 								{
 									"key": "payroll_period_id",
-									"value": "1d421d9f-5ad1-4aa6-832a-f4ca76898892"
+									"value": "6961121b-3664-479e-bcc8-a70c2929e45e"
 								}
 							]
 						}
@@ -475,7 +504,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJhN2ZlNWQtY2FmZC00MjNlLTlkYWItNGFjZWY1ZTQxZjEzIiwiaWF0IjoxNzQ5NDUyMTIyLCJleHAiOjE3NTAwNTY5MjIsIm5iZiI6MTc0OTQ1MjEyMn0.LDS8y2MH5uf63xDIzotWtAYNJVQLL4LIYlvzovbGRI29RLtGoB7QASo_saHaFoOBnL3vo2tzosWScQJYNeNgMQ",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -492,12 +521,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/payroll-period/v1?status=&limit=10&page=1&sort_by=created_at&sort_type=desc",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/payroll-period/v1?status=&limit=10&page=1&sort_by=created_at&sort_type=desc",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
 								"payroll-period",
@@ -627,7 +654,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5NDM3ODg1LCJleHAiOjE3NTAwNDI2ODUsIm5iZiI6MTc0OTQzNzg4NX0.rrjLuAFMW7CIsD0Uy5QlOna-IY6vCZRTBEB6gaHZyzIwm9zvHccBJVuxnVC-H_0hiPT7uFKg6j1j5ExnXaSm_A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -644,12 +671,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/payroll/v1/process",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/payroll/v1/process",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
 								"payroll",
@@ -778,7 +803,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJkZWE3NzQtMzc2Ni00MjdjLWJhYTktMDc0MTVkZDM2YTg5IiwiaWF0IjoxNzQ5NDU5NTU1LCJleHAiOjE3NTAwNjQzNTUsIm5iZiI6MTc0OTQ1OTU1NX0.k0R51Sag5tbnfWv0zVcnCOvrQ9s53hLoPYijW0bFe5v9m4Z2UxFozs5QA-ToFNHD9HKZuQkwM3X1WScH2OIJzQ",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -795,12 +820,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/payroll/v1/payslips/:payroll_period_id",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/payroll/v1/payslips/:payroll_period_id",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
 								"payroll",
@@ -890,7 +913,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTg5MTVhNTktY2NiNy00YzMyLThmZGMtZGU4ZjQyMDM2ZTY0IiwiaWF0IjoxNzQ5NDM3ODg1LCJleHAiOjE3NTAwNDI2ODUsIm5iZiI6MTc0OTQzNzg4NX0.rrjLuAFMW7CIsD0Uy5QlOna-IY6vCZRTBEB6gaHZyzIwm9zvHccBJVuxnVC-H_0hiPT7uFKg6j1j5ExnXaSm_A",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -907,12 +930,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/payroll/v1/summary/:payroll_period_id",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/payroll/v1/summary/:payroll_period_id",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
 								"payroll",
@@ -1004,7 +1025,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzlkZTUyMzItMzMyNC00YmEzLThhYzAtYzkyOGJlNTczZjFmIiwiaWF0IjoxNzQ5NDM4MTA4LCJleHAiOjE3NTAwNDI5MDgsIm5iZiI6MTc0OTQzODEwOH0.2myJCO-dIc1rLX0c8NomNZKZD6giOhYSA5cQo2hPrFoz51lNH3Nro-4cPSqgwuS-s0uySCxyMjs_7NQAHyJ6aQ",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -1013,7 +1034,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"attendance_date\": \"01-07-2025\"\n}",
+							"raw": "{\n    \"attendance_date\": \"02-06-2025\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1021,12 +1042,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/attendance/v1/submit",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/attendance/v1/submit",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
 								"attendance",
@@ -1143,30 +1162,28 @@
 							"body": "{\n    \"message\": \"Attendance date is not within an open payroll period\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: Attendance date is not within an open payroll period\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/attendance/create.ts:57:15)\\n    at processTicksAndRejections (native:7:39)\"\n}"
 						}
 					]
-				}
-			]
-		},
-		{
-			"name": "Overtime",
-			"item": [
+				},
 				{
-					"name": "Create",
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJhN2ZlNWQtY2FmZC00MjNlLTlkYWItNGFjZWY1ZTQxZjEzIiwiaWF0IjoxNzQ5Mzk1ODYyLCJleHAiOjE3NTAwMDA2NjIsIm5iZiI6MTc0OTM5NTg2Mn0.ckrX4yVDRK7hpmRTpu955n2SpBHNS6DPxb0t6wmuMkYKrB7yC4YVHRiZatYoHayNXlwgSK8ymRoQylnsaH9rWw",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
 						},
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"overtime_date\": \"08-06-2025\",\n    \"hours\": 3\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1174,29 +1191,33 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/overtime/v1/submit",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/attendance/v1/:attendance_id",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
-								"overtime",
+								"attendance",
 								"v1",
-								"submit"
+								":attendance_id"
+							],
+							"variable": [
+								{
+									"key": "attendance_id",
+									"value": "51795438-af5b-47b9-a50b-2630594eb661"
+								}
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "201 - Created",
+							"name": "200 - OK",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"overtime_date\": \"08-06-2025\",\n    \"hours\": 3\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1204,22 +1225,26 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3001/api/overtime/v1/submit",
-									"protocol": "http",
+									"raw": "{{url_dev}}/api/attendance/v1/:attendance_id",
 									"host": [
-										"localhost"
+										"{{url_dev}}"
 									],
-									"port": "3001",
 									"path": [
 										"api",
-										"overtime",
+										"attendance",
 										"v1",
-										"submit"
+										":attendance_id"
+									],
+									"variable": [
+										{
+											"key": "attendance_id",
+											"value": "51795438-af5b-47b9-a50b-2630594eb661"
+										}
 									]
 								}
 							},
-							"status": "Created",
-							"code": 201,
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
@@ -1232,77 +1257,103 @@
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 09 Jun 2025 13:05:22 GMT"
+									"value": "Tue, 17 Jun 2025 09:33:33 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "98"
+									"value": "359"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"success create new overtime\",\n    \"data\": \"ccc06b17-6f9d-4525-a9ff-babb2277da85\",\n    \"code\": 201\n}"
+							"body": "{\n    \"message\": null,\n    \"data\": {\n        \"id\": \"51795438-af5b-47b9-a50b-2630594eb661\",\n        \"employee_id\": \"72629165-45e4-43f3-8c37-03a78616407b\",\n        \"attendance_date\": \"2025-06-01T17:00:00.000Z\",\n        \"submitted_at\": \"2025-06-17T09:30:46.621Z\",\n        \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n        \"created_at\": \"2025-06-17T09:30:46.621Z\",\n        \"updated_at\": \"2025-06-17T09:30:46.621Z\"\n    },\n    \"code\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
-						{
-							"name": "422 - Error Payroll Period",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"overtime_date\": \"07-06-2025\",\n    \"hours\": 3\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:3001/api/overtime/v1/submit",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3001",
-									"path": [
-										"api",
-										"overtime",
-										"v1",
-										"submit"
-									]
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							},
-							"status": "Unprocessable Entity",
-							"code": 422,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 09 Jun 2025 05:21:33 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "461"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"message\": \"Overtime date is not within an open payroll period\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: Overtime date is not within an open payroll period\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/overtime/create.ts:69:15)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+							}
 						},
+						"url": {
+							"raw": "{{url_dev}}/api/attendance/v1?limit=10&page=1&sort_by=created_at&sort_type=desc&payroll_period_id=&attendance_date=&employee_id=",
+							"host": [
+								"{{url_dev}}"
+							],
+							"path": [
+								"api",
+								"attendance",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "optional ( default = 10 )"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "optional ( default = 1 )"
+								},
+								{
+									"key": "sort_by",
+									"value": "created_at",
+									"description": "optional ( default = created_at )"
+								},
+								{
+									"key": "sort_type",
+									"value": "desc",
+									"description": "optional ( default = DESC )"
+								},
+								{
+									"key": "payroll_period_id",
+									"value": "",
+									"description": "optional ( uuid )"
+								},
+								{
+									"key": "attendance_date",
+									"value": "",
+									"description": "optional ( date / date time )"
+								},
+								{
+									"key": "employee_id",
+									"value": "",
+									"description": "optional ( uuid )"
+								}
+							]
+						}
+					},
+					"response": [
 						{
-							"name": "422 - Error Attendance",
+							"name": "200 - OK",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"overtime_date\": \"01-07-2025\",\n    \"hours\": 3\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1310,22 +1361,56 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3001/api/overtime/v1/submit",
-									"protocol": "http",
+									"raw": "{{url_dev}}/api/attendance/v1?limit=10&page=1&sort_by=created_at&sort_type=desc&payroll_period_id=&attendance_date=&employee_id=",
 									"host": [
-										"localhost"
+										"{{url_dev}}"
 									],
-									"port": "3001",
 									"path": [
 										"api",
-										"overtime",
-										"v1",
-										"submit"
+										"attendance",
+										"v1"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "optional ( default = 10 )"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"description": "optional ( default = 1 )"
+										},
+										{
+											"key": "sort_by",
+											"value": "created_at",
+											"description": "optional ( default = created_at )"
+										},
+										{
+											"key": "sort_type",
+											"value": "desc",
+											"description": "optional ( default = DESC )"
+										},
+										{
+											"key": "payroll_period_id",
+											"value": "",
+											"description": "optional ( uuid )"
+										},
+										{
+											"key": "attendance_date",
+											"value": "",
+											"description": "optional ( date / date time )"
+										},
+										{
+											"key": "employee_id",
+											"value": "",
+											"description": "optional ( uuid )"
+										}
 									]
 								}
 							},
-							"status": "Unprocessable Entity",
-							"code": 422,
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
@@ -1338,68 +1423,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 09 Jun 2025 12:59:43 GMT"
+									"value": "Tue, 17 Jun 2025 09:50:35 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "467"
+									"value": "3368"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"You must submit attendance before submitting overtime\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: You must submit attendance before submitting overtime\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/overtime/create.ts:58:17)\\n    at processTicksAndRejections (native:7:39)\"\n}"
-						},
-						{
-							"name": "422 - Limit Overtima Per Day",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"overtime_date\": \"07-06-2025\",\n    \"hours\": 3\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:3001/api/overtime/v1/submit",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3001",
-									"path": [
-										"api",
-										"overtime",
-										"v1",
-										"submit"
-									]
-								}
-							},
-							"status": "Unprocessable Entity",
-							"code": 422,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 09 Jun 2025 13:04:43 GMT"
-								},
-								{
-									"key": "Content-Length",
-									"value": "473"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"message\": \"You cannot submit more than 3 hours of overtime in a day\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: You cannot submit more than 3 hours of overtime in a day\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/overtime/create.ts:80:15)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+							"body": "{\n    \"message\": null,\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": \"51795438-af5b-47b9-a50b-2630594eb661\",\n                \"employee_id\": \"72629165-45e4-43f3-8c37-03a78616407b\",\n                \"attendance_date\": \"2025-06-01T17:00:00.000Z\",\n                \"submitted_at\": \"2025-06-17T09:30:46.621Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:30:46.621Z\",\n                \"updated_at\": \"2025-06-17T09:30:46.621Z\"\n            },\n            {\n                \"id\": \"749947ab-cd0c-40c8-bd1e-481e5be17045\",\n                \"employee_id\": \"72629165-45e4-43f3-8c37-03a78616407b\",\n                \"attendance_date\": \"2025-06-05T17:00:00.000Z\",\n                \"submitted_at\": \"2025-06-17T09:30:43.960Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:30:43.960Z\",\n                \"updated_at\": \"2025-06-17T09:30:43.960Z\"\n            },\n            {\n                \"id\": \"a8f09656-217c-4641-b5a3-79910fd5183a\",\n                \"employee_id\": \"72629165-45e4-43f3-8c37-03a78616407b\",\n                \"attendance_date\": \"2025-06-04T17:00:00.000Z\",\n                \"submitted_at\": \"2025-06-17T09:30:42.719Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:30:42.720Z\",\n                \"updated_at\": \"2025-06-17T09:30:42.720Z\"\n            },\n            {\n                \"id\": \"2cad2628-a485-4124-ad20-ea88faede3ef\",\n                \"employee_id\": \"72629165-45e4-43f3-8c37-03a78616407b\",\n                \"attendance_date\": \"2025-06-03T17:00:00.000Z\",\n                \"submitted_at\": \"2025-06-17T09:30:41.563Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:30:41.563Z\",\n                \"updated_at\": \"2025-06-17T09:30:41.563Z\"\n            },\n            {\n                \"id\": \"fc527e4e-42c4-44fd-80bf-a83c6fe66d57\",\n                \"employee_id\": \"72629165-45e4-43f3-8c37-03a78616407b\",\n                \"attendance_date\": \"2025-06-02T17:00:00.000Z\",\n                \"submitted_at\": \"2025-06-17T09:30:40.413Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:30:40.414Z\",\n                \"updated_at\": \"2025-06-17T09:30:40.414Z\"\n            },\n            {\n                \"id\": \"467e8881-7c45-4864-aee8-09b7d4a3112d\",\n                \"employee_id\": \"72629165-45e4-43f3-8c37-03a78616407b\",\n                \"attendance_date\": \"2025-06-01T17:00:00.000Z\",\n                \"submitted_at\": \"2025-06-17T09:30:37.052Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:30:37.053Z\",\n                \"updated_at\": \"2025-06-17T09:30:37.053Z\"\n            },\n            {\n                \"id\": \"f5bf9b86-5cd2-4cc6-a247-7f62fd612925\",\n                \"employee_id\": \"661424eb-4383-46b0-a9c2-8b6bda6bd37f\",\n                \"attendance_date\": \"2025-06-05T17:00:00.000Z\",\n                \"submitted_at\": \"2025-06-17T09:30:27.146Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:30:27.146Z\",\n                \"updated_at\": \"2025-06-17T09:30:27.146Z\"\n            },\n            {\n                \"id\": \"f6009de4-a9fc-4cca-9754-36f8b067b767\",\n                \"employee_id\": \"661424eb-4383-46b0-a9c2-8b6bda6bd37f\",\n                \"attendance_date\": \"2025-06-04T17:00:00.000Z\",\n                \"submitted_at\": \"2025-06-17T09:30:25.664Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:30:25.665Z\",\n                \"updated_at\": \"2025-06-17T09:30:25.665Z\"\n            },\n            {\n                \"id\": \"5027972e-0bac-49c0-a5f3-eaff3b9fd507\",\n                \"employee_id\": \"661424eb-4383-46b0-a9c2-8b6bda6bd37f\",\n                \"attendance_date\": \"2025-06-03T17:00:00.000Z\",\n                \"submitted_at\": \"2025-06-17T09:30:24.205Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:30:24.205Z\",\n                \"updated_at\": \"2025-06-17T09:30:24.205Z\"\n            },\n            {\n                \"id\": \"bd573f6f-198a-4569-9857-1739849c9441\",\n                \"employee_id\": \"661424eb-4383-46b0-a9c2-8b6bda6bd37f\",\n                \"attendance_date\": \"2025-06-02T17:00:00.000Z\",\n                \"submitted_at\": \"2025-06-17T09:30:22.593Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:30:22.594Z\",\n                \"updated_at\": \"2025-06-17T09:30:22.594Z\"\n            }\n        ],\n        \"total\": 16,\n        \"per_page\": 10,\n        \"current_page\": 1,\n        \"last_page\": 2,\n        \"from\": 1,\n        \"to\": 10\n    },\n    \"code\": 200\n}"
 						}
 					]
 				}
@@ -1416,7 +1448,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjJhN2ZlNWQtY2FmZC00MjNlLTlkYWItNGFjZWY1ZTQxZjEzIiwiaWF0IjoxNzQ5Mzk1ODYyLCJleHAiOjE3NTAwMDA2NjIsIm5iZiI6MTc0OTM5NTg2Mn0.ckrX4yVDRK7hpmRTpu955n2SpBHNS6DPxb0t6wmuMkYKrB7yC4YVHRiZatYoHayNXlwgSK8ymRoQylnsaH9rWw",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -1425,7 +1457,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"reimbursement_date\": \"07-06-2025\",\n    \"amount\": 200000,\n    \"description\": \"reimbursement 2 - uang transportasi perjalanan dinas\"\n}",
+							"raw": "{\n    \"reimbursement_date\": \"01-06-2025\",\n    \"amount\": 200000,\n    \"description\": \"reimbursement 1 - uang transportasi perjalanan dinas\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1433,12 +1465,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/reimbursement/v1/submit",
-							"protocol": "http",
+							"raw": "{{url_dev}}/api/reimbursement/v1/submit",
 							"host": [
-								"localhost"
+								"{{url_dev}}"
 							],
-							"port": "3001",
 							"path": [
 								"api",
 								"reimbursement",
@@ -1606,6 +1636,748 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"You must submit attendance before submitting reimbursement\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: You must submit attendance before submitting reimbursement\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/reimbursement/create.ts:57:17)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_dev}}/api/reimbursement/v1/:attendance_id",
+							"host": [
+								"{{url_dev}}"
+							],
+							"path": [
+								"api",
+								"reimbursement",
+								"v1",
+								":attendance_id"
+							],
+							"variable": [
+								{
+									"key": "attendance_id",
+									"value": "16e1a5c2-f034-4fb2-b5a3-a2f412998856"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_dev}}/api/reimbursement/v1/:attendance_id",
+									"host": [
+										"{{url_dev}}"
+									],
+									"path": [
+										"api",
+										"reimbursement",
+										"v1",
+										":attendance_id"
+									],
+									"variable": [
+										{
+											"key": "attendance_id",
+											"value": "16e1a5c2-f034-4fb2-b5a3-a2f412998856"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Jun 2025 11:32:29 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "452"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": null,\n    \"data\": {\n        \"id\": \"16e1a5c2-f034-4fb2-b5a3-a2f412998856\",\n        \"employee_id\": \"05bd49c5-475b-4862-8792-2c65997ad393\",\n        \"amount\": \"200000.00\",\n        \"reimbursement_date\": \"2025-05-31T17:00:00.000Z\",\n        \"description\": \"reimbursement 1 - uang transportasi perjalanan dinas\",\n        \"submitted_at\": \"2025-06-17T09:58:24.710Z\",\n        \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n        \"created_at\": \"2025-06-17T09:58:24.739Z\",\n        \"updated_at\": \"2025-06-17T09:58:24.739Z\"\n    },\n    \"code\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_dev}}/api/reimbursement/v1?limit=10&page=1&sort_by=created_at&sort_type=desc&payroll_period_id=&reimbursement_date=&employee_id=",
+							"host": [
+								"{{url_dev}}"
+							],
+							"path": [
+								"api",
+								"reimbursement",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "optional ( default = 10 )"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "optional ( default = 1 )"
+								},
+								{
+									"key": "sort_by",
+									"value": "created_at",
+									"description": "optional ( default = created_at )"
+								},
+								{
+									"key": "sort_type",
+									"value": "desc",
+									"description": "optional ( default = DESC )"
+								},
+								{
+									"key": "payroll_period_id",
+									"value": "",
+									"description": "optional ( uuid )"
+								},
+								{
+									"key": "reimbursement_date",
+									"value": "",
+									"description": "optional ( date / date time )"
+								},
+								{
+									"key": "employee_id",
+									"value": "",
+									"description": "optional ( uuid )"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_dev}}/api/reimbursement/v1?limit=10&page=1&sort_by=created_at&sort_type=desc&payroll_period_id=&reimbursement_date=&employee_id=",
+									"host": [
+										"{{url_dev}}"
+									],
+									"path": [
+										"api",
+										"reimbursement",
+										"v1"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "optional ( default = 10 )"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"description": "optional ( default = 1 )"
+										},
+										{
+											"key": "sort_by",
+											"value": "created_at",
+											"description": "optional ( default = created_at )"
+										},
+										{
+											"key": "sort_type",
+											"value": "desc",
+											"description": "optional ( default = DESC )"
+										},
+										{
+											"key": "payroll_period_id",
+											"value": "",
+											"description": "optional ( uuid )"
+										},
+										{
+											"key": "reimbursement_date",
+											"value": "",
+											"description": "optional ( date / date time )"
+										},
+										{
+											"key": "employee_id",
+											"value": "",
+											"description": "optional ( uuid )"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Jun 2025 11:32:36 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "534"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": null,\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": \"16e1a5c2-f034-4fb2-b5a3-a2f412998856\",\n                \"employee_id\": \"05bd49c5-475b-4862-8792-2c65997ad393\",\n                \"amount\": \"200000.00\",\n                \"reimbursement_date\": \"2025-05-31T17:00:00.000Z\",\n                \"description\": \"reimbursement 1 - uang transportasi perjalanan dinas\",\n                \"submitted_at\": \"2025-06-17T09:58:24.710Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:58:24.739Z\",\n                \"updated_at\": \"2025-06-17T09:58:24.739Z\"\n            }\n        ],\n        \"total\": 1,\n        \"per_page\": 10,\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"from\": 1,\n        \"to\": 1\n    },\n    \"code\": 200\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Overtime",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"overtime_date\": \"03-06-2025\",\n    \"hours\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_dev}}/api/overtime/v1/submit",
+							"host": [
+								"{{url_dev}}"
+							],
+							"path": [
+								"api",
+								"overtime",
+								"v1",
+								"submit"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201 - Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"overtime_date\": \"03-06-2025\",\n    \"hours\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_dev}}/api/overtime/v1/submit",
+									"host": [
+										"{{url_dev}}"
+									],
+									"path": [
+										"api",
+										"overtime",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Jun 2025 11:36:39 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "98"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"success create new overtime\",\n    \"data\": \"9c7da975-e6a4-4d03-8b44-9b6a87fd253c\",\n    \"code\": 201\n}"
+						},
+						{
+							"name": "422 - Limit Hour Exceed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"overtime_date\": \"08-06-2025\",\n    \"hours\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_dev}}/api/overtime/v1/submit",
+									"host": [
+										"{{url_dev}}"
+									],
+									"path": [
+										"api",
+										"overtime",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Jun 2025 11:36:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "473"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You cannot submit more than 3 hours of overtime in a day\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: You cannot submit more than 3 hours of overtime in a day\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/overtime/create.ts:71:15)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						},
+						{
+							"name": "422 - Error Attendance",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"overtime_date\": \"09-06-2025\",\n    \"hours\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_dev}}/api/overtime/v1/submit",
+									"host": [
+										"{{url_dev}}"
+									],
+									"path": [
+										"api",
+										"overtime",
+										"v1",
+										"submit"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Jun 2025 11:36:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "467"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You must submit attendance before submitting overtime\",\n    \"data\": null,\n    \"code\": 422,\n    \"stack\": \"Error: You must submit attendance before submitting overtime\\n    at new HTTPException (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/node_modules/hono/dist/http-exception.js:6:5)\\n    at <anonymous> (/Users/ignata/Desktop/Assignment_Test/dealls-backend-case-study/src/pipes/overtime/create.ts:54:17)\\n    at processTicksAndRejections (native:7:39)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_dev}}/api/overtime/v1/:attendance_id",
+							"host": [
+								"{{url_dev}}"
+							],
+							"path": [
+								"api",
+								"overtime",
+								"v1",
+								":attendance_id"
+							],
+							"variable": [
+								{
+									"key": "attendance_id",
+									"value": "0455afa9-4c94-454d-a276-81fa26ab010c"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_dev}}/api/overtime/v1/:attendance_id",
+									"host": [
+										"{{url_dev}}"
+									],
+									"path": [
+										"api",
+										"overtime",
+										"v1",
+										":attendance_id"
+									],
+									"variable": [
+										{
+											"key": "attendance_id",
+											"value": "0455afa9-4c94-454d-a276-81fa26ab010c"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Jun 2025 11:34:55 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "369"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": null,\n    \"data\": {\n        \"id\": \"0455afa9-4c94-454d-a276-81fa26ab010c\",\n        \"employee_id\": \"05bd49c5-475b-4862-8792-2c65997ad393\",\n        \"overtime_date\": \"2025-06-06T17:00:00.000Z\",\n        \"hours\": \"2\",\n        \"submitted_at\": \"2025-06-17T09:58:01.630Z\",\n        \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n        \"created_at\": \"2025-06-17T09:58:01.632Z\",\n        \"updated_at\": \"2025-06-17T09:58:01.632Z\"\n    },\n    \"code\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Index",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_dev}}/api/overtime/v1?limit=10&page=1&sort_by=created_at&sort_type=desc&payroll_period_id=&overtime_date=&employee_id=",
+							"host": [
+								"{{url_dev}}"
+							],
+							"path": [
+								"api",
+								"overtime",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "optional ( default = 10 )"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "optional ( default = 1 )"
+								},
+								{
+									"key": "sort_by",
+									"value": "created_at",
+									"description": "optional ( default = created_at )"
+								},
+								{
+									"key": "sort_type",
+									"value": "desc",
+									"description": "optional ( default = DESC )"
+								},
+								{
+									"key": "payroll_period_id",
+									"value": "",
+									"description": "optional ( uuid )"
+								},
+								{
+									"key": "overtime_date",
+									"value": "",
+									"description": "optional ( date / date time )"
+								},
+								{
+									"key": "employee_id",
+									"value": "",
+									"description": "optional ( uuid )"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url_dev}}/api/overtime/v1?limit=10&page=1&sort_by=created_at&sort_type=desc&payroll_period_id=&overtime_date=&employee_id=",
+									"host": [
+										"{{url_dev}}"
+									],
+									"path": [
+										"api",
+										"overtime",
+										"v1"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "optional ( default = 10 )"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"description": "optional ( default = 1 )"
+										},
+										{
+											"key": "sort_by",
+											"value": "created_at",
+											"description": "optional ( default = created_at )"
+										},
+										{
+											"key": "sort_type",
+											"value": "desc",
+											"description": "optional ( default = DESC )"
+										},
+										{
+											"key": "payroll_period_id",
+											"value": "",
+											"description": "optional ( uuid )"
+										},
+										{
+											"key": "overtime_date",
+											"value": "",
+											"description": "optional ( date / date time )"
+										},
+										{
+											"key": "employee_id",
+											"value": "",
+											"description": "optional ( uuid )"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 17 Jun 2025 11:35:14 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "786"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": null,\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": \"968084a6-d62d-4c79-bec6-ab2464dedbed\",\n                \"employee_id\": \"05bd49c5-475b-4862-8792-2c65997ad393\",\n                \"overtime_date\": \"2025-06-07T17:00:00.000Z\",\n                \"hours\": \"2\",\n                \"submitted_at\": \"2025-06-17T09:58:06.255Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:58:06.256Z\",\n                \"updated_at\": \"2025-06-17T09:58:06.256Z\"\n            },\n            {\n                \"id\": \"0455afa9-4c94-454d-a276-81fa26ab010c\",\n                \"employee_id\": \"05bd49c5-475b-4862-8792-2c65997ad393\",\n                \"overtime_date\": \"2025-06-06T17:00:00.000Z\",\n                \"hours\": \"2\",\n                \"submitted_at\": \"2025-06-17T09:58:01.630Z\",\n                \"payroll_period_id\": \"af68279a-5a0e-4997-bd8f-b93374c5c23b\",\n                \"created_at\": \"2025-06-17T09:58:01.632Z\",\n                \"updated_at\": \"2025-06-17T09:58:01.632Z\"\n            }\n        ],\n        \"total\": 2,\n        \"per_page\": 10,\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"from\": 1,\n        \"to\": 2\n    },\n    \"code\": 200\n}"
 						}
 					]
 				}
