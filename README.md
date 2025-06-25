@@ -89,7 +89,7 @@ bun run test:coverage
 
 ```
 ├── api_doc/             # API Documentation ( Postman Collection )
-├── src/                
+├── src/
 │   ├── helpers/         # Utility functions
 │   ├── middleware/      # Hono, token & user middlewares
 │   ├── migrations/      # SQL For Migration Database, Tables and Seeders
@@ -129,6 +129,11 @@ This project demonstrates:
 
 ---
 
-### **Author** : **💻 Aldo Ignata Chandra**
+## 👨‍💻 Author
+
+Created with 💻 by Ignata
+
+- 📂 GitHub: [Aldo Ignata Chandra](https://github.com/aldoignatachandra)
+- 💼 LinkedIn: [Aldo Ignata Chandra](https://linkedin.com/in/aldoignatachandra)
 
 ---
